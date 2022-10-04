@@ -308,7 +308,11 @@
 -r:"Library/Bee/artifacts/1300b0aP.dag/Unity.VisualScripting.Flow.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aP.dag/Unity.VisualScripting.State.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aP.dag/UnityEngine.UI.ref.dll"
+"Assets/Scripts/DragDrop.cs"
+"Assets/Scripts/Draggable.cs"
+"Assets/Scripts/Level1Minigame.cs"
 "Assets/Scripts/LoginManager.cs"
+"Assets/Scripts/MoveSprite.cs"
 -langversion:9.0
 
 /deterministic
