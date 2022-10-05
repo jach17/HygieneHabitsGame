@@ -1,4 +1,4 @@
-#Fri Sep 30 18:33:26 CDT 2022
+#Mon Oct 03 18:15:15 CDT 2022
 base.0=C\:\\Users\\PC\\Documents\\Residencia\\HygieneHabitsGame\\Library\\Bee\\Android\\Prj\\Mono2x\\Gradle\\launcher\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

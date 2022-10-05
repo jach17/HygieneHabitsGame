@@ -30,15 +30,15 @@ ADDED from C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Androi
 activity#com.unity3d.player.UnityPlayerActivity
 ADDED from C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:5-11:16
 	android:screenOrientation
-		ADDED from C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:111-147
+		ADDED from C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:111-155
 	android:launchMode
-		ADDED from C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:148-179
+		ADDED from C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:156-187
 	android:hardwareAccelerated
-		ADDED from C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:397-432
+		ADDED from C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:405-440
 	android:resizeableActivity
-		ADDED from C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:362-396
+		ADDED from C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:370-404
 	android:configChanges
-		ADDED from C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:180-361
+		ADDED from C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:188-369
 	android:theme
 		ADDED from C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:69-110
 	android:name

@@ -55,15 +55,15 @@
 32            android:name="com.unity3d.player.UnityPlayerActivity"
 32-->C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:15-68
 33            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale|layoutDirection|density"
-33-->C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:180-361
+33-->C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:188-369
 34            android:hardwareAccelerated="false"
-34-->C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:397-432
+34-->C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:405-440
 35            android:launchMode="singleTask"
-35-->C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:148-179
+35-->C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:156-187
 36            android:resizeableActivity="false"
-36-->C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:362-396
-37            android:screenOrientation="fullUser"
-37-->C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:111-147
+36-->C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:370-404
+37            android:screenOrientation="reverseLandscape"
+37-->C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:111-155
 38            android:theme="@style/UnityThemeSelector" >
 38-->C:\Users\PC\Documents\Residencia\HygieneHabitsGame\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\AndroidManifest.xml:4:69-110
 39            <intent-filter>
