@@ -354,7 +354,14 @@
 -r:"Library/Bee/artifacts/1300b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEngine.UI.ref.dll"
+"Assets/Scripts/ColliderController.cs"
+"Assets/Scripts/DestroySprites.cs"
+"Assets/Scripts/DragDrop.cs"
+"Assets/Scripts/Draggable.cs"
+"Assets/Scripts/Level1Minigame.cs"
 "Assets/Scripts/LoginManager.cs"
+"Assets/Scripts/MoveSprite.cs"
+"Assets/Scripts/Utils.cs"
 -langversion:9.0
 
 /deterministic
