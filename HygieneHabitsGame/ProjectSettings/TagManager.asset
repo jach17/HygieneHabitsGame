@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Util
   - Trash
+  - Virus
   layers:
   - Default
   - TransparentFX
