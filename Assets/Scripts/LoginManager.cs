@@ -16,6 +16,7 @@ public class LoginManager : MonoBehaviour
     //[SerializeField]
     //private Button btnPlay;
     // Start is called before the first frame update
+    //Comment to test git
     void Start()
     {
         
