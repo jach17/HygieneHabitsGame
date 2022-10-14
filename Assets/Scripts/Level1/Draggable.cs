@@ -6,17 +6,24 @@ public class Draggable : MonoBehaviour
 {
     Vector3 mousePossitionOffset;
 
+    private bool canDrag = true;
+
+    public bool CanDrag
+    {
+        get { return canDrag; }
+        set { canDrag = value; }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private Vector3 GetMouseWorldPosition()
@@ -26,14 +33,17 @@ public class Draggable : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("OnMouseDown");
+
         mousePossitionOffset = gameObject.transform.position - GetMouseWorldPosition();
     }
     private void OnMouseDrag()
     {
-        Debug.Log("OnMouseDrag");
-        transform.position = GetMouseWorldPosition() + mousePossitionOffset;
+        if (canDrag)
+        {
+            transform.position = GetMouseWorldPosition() + mousePossitionOffset;
+        }
+
     }
 
-    
+
 }
