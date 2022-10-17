@@ -1483,7 +1483,7 @@ MonoBehaviour:
   particulas: {fileID: 833503953}
   IntentosRestantesTXT: {fileID: 1268547818}
   Winner: {fileID: 31790484}
-  Losser: {fileID: 0}
+  Losser: {fileID: 1749563150}
   IntentosRes: {fileID: 791721605}
   m_MenuPausa: {fileID: 1627571085}
   m_Pausa: {fileID: 1242852821}
@@ -3754,7 +3754,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a09e1d58476695d48af4d3c67ca1e8cb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 389f7ee28bb8fd64b856a0812f5dd053, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3790,7 +3790,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1749563151
 MonoBehaviour:
   m_ObjectHideFlags: 0
