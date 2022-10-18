@@ -41,7 +41,14 @@ public class Level2Min2Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time -= Time.deltaTime;
+        if (time <= 0)
+        {
+            time = 0;
+        }
+        else{
+            time -= Time.deltaTime;
+        }
+        
         txtTime.text = time.ToString("F2");
     }
 
