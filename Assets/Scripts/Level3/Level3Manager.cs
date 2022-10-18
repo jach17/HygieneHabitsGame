@@ -56,7 +56,15 @@ public class Level3Manager : MonoBehaviour
         {
             return;
         }
-        time -= Time.deltaTime;
+        if (time <= 0)
+        {
+            time = 0;
+        }
+        else
+        {
+            time -= Time.deltaTime;
+        }
+
         txtTime.text = time.ToString("F2");
 
         //DishController dishController = dishes[index].GetComponent<DishController>();
