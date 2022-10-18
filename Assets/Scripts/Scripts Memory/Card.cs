@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Card : MonoBehaviour
 {
@@ -35,5 +36,13 @@ public class Card : MonoBehaviour
     public void SetearImage(Sprite sprite)
     {
         m_SpriteRenderer.sprite = sprite;
+    }
+    public void PlayLevel5()
+    {
+        SceneManager.LoadScene("Level5-2");
+    }
+    public void Return()
+    {
+        SceneManager.LoadScene("ChooseLevelScene");
     }
 }
