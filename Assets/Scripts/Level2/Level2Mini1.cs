@@ -30,6 +30,9 @@ public class Level2Mini1 : MonoBehaviour
     private GameObject[] hazards;
 
     private float puntos;
+
+    [SerializeField]
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +58,7 @@ public class Level2Mini1 : MonoBehaviour
     public void AddPunto()
     {
         puntos++;
+        audioSource.Play();
         txtPuntos.text = "Puntos: " + puntos.ToString();
     }
 

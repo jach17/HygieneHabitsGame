@@ -33,6 +33,9 @@ public class Level3Manager : MonoBehaviour
     private float puntos;
     private int index = 0;
 
+    [SerializeField]
+    private AudioSource audioSource;
+
     private bool moveRandom;
 
     public bool MoveRandom
@@ -103,6 +106,7 @@ public class Level3Manager : MonoBehaviour
         Destroy(currentSoap);
         index++;
         puntos++;
+        audioSource.Play();
         txtPuntos.text = "Puntos: " + puntos.ToString();
 
         index = Random.Range(0, 9);
