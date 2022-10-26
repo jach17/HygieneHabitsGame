@@ -27,6 +27,9 @@ public class Level1Minigame : MonoBehaviour
     private int points;
     [SerializeField]
     private float time;
+
+    [SerializeField]
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +46,7 @@ public class Level1Minigame : MonoBehaviour
     public void AddPoint()
     {
         points++;
+        audioSource.Play();
         txtPoints.text = "Puntos: " + points.ToString();
     }
 
