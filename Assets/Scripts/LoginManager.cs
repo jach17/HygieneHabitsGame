@@ -53,8 +53,9 @@ public class LoginManager : MonoBehaviour
     {
         Debug.Log("Send");
         //PostPlayer();
-        //GetUsers();
-        GetUserById("9");
+        GetUsers();
+        //GetUserById("9");
+        //PostAuth();
     }
 
     //Metodo para obtener la informacion del usuario guardada en el telefono, si ya existe la cuenta se salta la escena de login
@@ -117,7 +118,7 @@ public class LoginManager : MonoBehaviour
     {
         String url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/add/player";
 
-        Player player = new Player("Nector", "123456789", "7", 1, "123abc");
+        Player player = new Player("AAAAAA", "RRRRRRR", "12", 1, "123abc");
         var json = JsonConvert.SerializeObject(player);
 
         using UnityWebRequest webRequest = UnityWebRequest.Post(url, "POST");
