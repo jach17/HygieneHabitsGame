@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using SimpleJSON;
+using UnityEngine.SceneManagement;
 
 public class LoginManager : MonoBehaviour
 {
@@ -30,10 +31,9 @@ public class LoginManager : MonoBehaviour
     private InputField txtIdTutor;
     [SerializeField]
     private InputField txt;*/
-
-    private bool formActive;
-    private string user, password,edad,token,user2,password2;
-    private int idtutor;
+    //JSONNode info;
+    private bool formActive,reg;
+    private string user, password,edad,token,idtutor;
     //[SerializeField]
     //private Button btnPlay;
     // Start is called before the first frame update
@@ -83,44 +83,31 @@ public class LoginManager : MonoBehaviour
     //Metodo que se llama cuando se deja de escribir en el txt de usuario
     public void ReadUser(string s)
     {
-        Debug.Log(s);
         user = s;
     }
-    public void ReadUser2(string s)
-    {
-        Debug.Log(s);
-        user2 = s;
-    }
+
     //Metodo que se llama cuando se deja de escribir en el txt de la contraseña
     public void ReadPassword(string s)
     {
-        Debug.Log(s);
-
         password = s;
     }
-    public void ReadPassword2(string s)
-    {
-        Debug.Log(s);
 
-        password2 = s;
-    }
     public void ReadEdad(string s)
     {
-        Debug.Log(s);
+ 
 
         edad = s;
     }
 
     public void ReadToken(string s)
     {
-        Debug.Log(s);
+
 
         token = s;
     }
 
-    public void ReadIdTutor(int s)
+    public void ReadIdTutor(string s)
     {
-        Debug.Log(s);
 
         idtutor = s;
     }
@@ -163,6 +150,7 @@ public class LoginManager : MonoBehaviour
            
         }
         PostAuth(user, password);
+        
     }
     public void RegistrarUsuario()
     {
@@ -170,17 +158,14 @@ public class LoginManager : MonoBehaviour
         {
             
         }*/
-        Debug.Log(user);
-        Debug.Log(password);
-        Debug.Log(edad);
-        Debug.Log(idtutor);
-        Debug.Log(token);
-        PostPlayer(user2, password2, edad, idtutor, token);
+
+        PostPlayer(user, password, edad, idtutor, token);
+        
     }
 
     public void GetUsers() => StartCoroutine(GetUsers_Coroutine());
-    public void GetUserById(String id) => StartCoroutine(GetUserById_Coroutine(id));
-    public void PostPlayer(String nombre,String password, String edad, int id, String token) => StartCoroutine(PostPlayer_Coroutine(nombre,password,edad,id,token));
+    public void GetUserById(string id) => StartCoroutine(GetUserById_Coroutine(id));
+    public void PostPlayer(string nombre,string password, string edad, string id, string token) => StartCoroutine(PostPlayer_Coroutine(nombre,password,edad,id,token));
     public void PostAuth(String user, String password) => StartCoroutine(PostAuthPlayer_Coroutine(user,password));
     
     IEnumerator PostAuthPlayer_Coroutine(String user,String password)
@@ -193,7 +178,7 @@ public class LoginManager : MonoBehaviour
         using UnityWebRequest webRequest = UnityWebRequest.Post(url, "POST");
         webRequest.SetRequestHeader("Content-Type", "application/json");
         byte[] rawData = Encoding.UTF8.GetBytes(json);
-        Debug.Log(json);
+        //Debug.Log(json);
         webRequest.uploadHandler = new UploadHandlerRaw(rawData);
         webRequest.downloadHandler = new DownloadHandlerBuffer();
         yield return webRequest.SendWebRequest();
@@ -203,23 +188,31 @@ public class LoginManager : MonoBehaviour
             case UnityWebRequest.Result.InProgress:
                 break;
             case UnityWebRequest.Result.Success:
-                String response = webRequest.downloadHandler.text;
-                JObject data = JObject.Parse(response);
-                Debug.Log(data);
+                //String response = webRequest.downloadHandler.text;
+                //JObject data = JObject.Parse(response);
+                JSONNode info = JSON.Parse(webRequest.downloadHandler.text);
+                reg = info["message"]["response"][0]["isRegistred"];
                 break;
             case UnityWebRequest.Result.ConnectionError:
                 Debug.Log(webRequest.downloadHandler.text);
                 break;
         }
-
+        if (isRegistred())
+        {
+            SceneManager.LoadScene("ChooseLevelScene");
+        }
+        else
+        {
+            Debug.Log("NO ESTA REGISTRADOO!");
+        }
         yield break;
     }
 
-    IEnumerator PostPlayer_Coroutine(String nombre, String password, String edad, int id, String token)
+    IEnumerator PostPlayer_Coroutine(String nombre, String password, String edad, string id, String token)
     {
         String url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/add/player";
-        //int idTutor = Convert.ToInt32(id);
-        Player player = new Player(nombre,password,edad,id,token);
+        int idTutor = Convert.ToInt32(id);
+        Player player = new Player(nombre,password,edad,idTutor,token);
         var json = JsonConvert.SerializeObject(player);
 
         using UnityWebRequest webRequest = UnityWebRequest.Post(url, "POST");
@@ -237,11 +230,21 @@ public class LoginManager : MonoBehaviour
             case UnityWebRequest.Result.Success:
                 String response = webRequest.downloadHandler.text;
                 JObject data = JObject.Parse(response);
-                Debug.Log(data);
+                JSONNode info = JSON.Parse(webRequest.downloadHandler.text);
+                reg = info["message"]["response"][0]["inserted"];
                 break;
             case UnityWebRequest.Result.ConnectionError:
                 Debug.Log(webRequest.downloadHandler.text);
                 break;
+        }
+
+        if (reg)
+        {
+            SceneManager.LoadScene("ChooseLevelScene");
+        }
+        else
+        {
+            Debug.Log("ERROR AL REGISTRAR USUARIO");
         }
 
         yield break;
@@ -284,6 +287,19 @@ public class LoginManager : MonoBehaviour
                 Debug.Log("Edad: " + itemsData["message"]["response"][0]["agePlayer"]);
                 Debug.Log("Tutor: " + itemsData["message"]["response"][0]["idTutorOwner"]);
             }
+        }
+    }
+
+    private bool isRegistred()
+    {
+
+        if (reg)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
