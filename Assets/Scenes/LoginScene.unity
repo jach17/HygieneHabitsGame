@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 109872633}
   - component: {fileID: 109872632}
   m_Layer: 5
-  m_Name: NombreInput1 (1)
+  m_Name: NombreInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -383,8 +383,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2123552827}
         m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
-        m_MethodName: ReadUser2
-        m_Mode: 5
+        m_MethodName: ReadUser
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -697,7 +697,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &221592748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1487,7 +1487,7 @@ GameObject:
   - component: {fileID: 571480799}
   - component: {fileID: 571480798}
   m_Layer: 5
-  m_Name: TokenInput (1)
+  m_Name: TokenInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1579,7 +1579,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2123552827}
         m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
         m_MethodName: ReadToken
-        m_Mode: 5
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3689,7 +3689,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2123552827}
         m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
         m_MethodName: ReadUser
-        m_Mode: 5
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3994,7 +3994,7 @@ GameObject:
   - component: {fileID: 1191238833}
   - component: {fileID: 1191238832}
   m_Layer: 5
-  m_Name: IdTutorInput (1)
+  m_Name: IdTutorInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4086,7 +4086,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2123552827}
         m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
         m_MethodName: ReadIdTutor
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4812,7 +4812,7 @@ GameObject:
   - component: {fileID: 1321221649}
   - component: {fileID: 1321221648}
   m_Layer: 5
-  m_Name: "Contrase\xF1aInput1 (1)"
+  m_Name: "Contrase\xF1aInput"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4903,8 +4903,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2123552827}
         m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
-        m_MethodName: ReadPassword2
-        m_Mode: 5
+        m_MethodName: ReadPassword
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5092,7 +5092,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2123552827}
         m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
         m_MethodName: ReadPassword
-        m_Mode: 5
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6284,7 +6284,7 @@ GameObject:
   - component: {fileID: 1698189003}
   - component: {fileID: 1698189002}
   m_Layer: 5
-  m_Name: EdadInput (1)
+  m_Name: EdadInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6376,7 +6376,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2123552827}
         m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
         m_MethodName: ReadEdad
-        m_Mode: 5
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7030,7 +7030,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1844780992
 MonoBehaviour:
   m_ObjectHideFlags: 0
