@@ -5,7 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class ChooseLevelManager : MonoBehaviour
 {
-   public void PlayLeve1()
+    [SerializeField] private GameObject m_MenuPausa, m_Pausa;
+    public void PlayHome()
+    {
+        SceneManager.LoadScene("ChooseLevelScene");
+    }
+    public void PlayLeve1()
     {
         SceneManager.LoadScene("Level1-1");
     }
