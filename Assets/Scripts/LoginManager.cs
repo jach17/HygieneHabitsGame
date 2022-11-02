@@ -40,6 +40,7 @@ public class LoginManager : MonoBehaviour
     //Comment to test git
     void Start()
     {
+        GetAccount();
 
     }
 
@@ -76,8 +77,9 @@ public class LoginManager : MonoBehaviour
     //Metodo para obtener la informacion del usuario guardada en el telefono, si ya existe la cuenta se salta la escena de login
     public void GetAccount()
     {
-        Debug.Log("GetAccount");
-
+        user = PlayerPrefs.GetString("namePlayer");
+        password = PlayerPrefs.GetString("password");
+        PostAuth(user, password,true);
     }
 
     //Metodo que se llama cuando se deja de escribir en el txt de usuario
@@ -149,7 +151,7 @@ public class LoginManager : MonoBehaviour
         {
            
         }
-        PostAuth(user, password);
+        PostAuth(user, password,false);
         
     }
     public void RegistrarUsuario()
@@ -166,9 +168,9 @@ public class LoginManager : MonoBehaviour
     public void GetUsers() => StartCoroutine(GetUsers_Coroutine());
     public void GetUserById(string id) => StartCoroutine(GetUserById_Coroutine(id));
     public void PostPlayer(string nombre,string password, string edad, string id, string token) => StartCoroutine(PostPlayer_Coroutine(nombre,password,edad,id,token));
-    public void PostAuth(String user, String password) => StartCoroutine(PostAuthPlayer_Coroutine(user,password));
+    public void PostAuth(String user, String password, bool autoLogin) => StartCoroutine(PostAuthPlayer_Coroutine(user,password, autoLogin));
     
-    IEnumerator PostAuthPlayer_Coroutine(String user,String password)
+    IEnumerator PostAuthPlayer_Coroutine(String user,String password, bool autoLogin)
     {
         String url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/auth/player";
 
@@ -199,6 +201,12 @@ public class LoginManager : MonoBehaviour
         }
         if (isRegistred())
         {
+            if (!autoLogin)
+            {
+                PlayerPrefs.SetString("namePlayer", user);
+                PlayerPrefs.SetString("password", password);
+                PlayerPrefs.Save();
+            }
             SceneManager.LoadScene("ChooseLevelScene");
         }
         else
