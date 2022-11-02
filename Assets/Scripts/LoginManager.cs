@@ -248,6 +248,8 @@ public class LoginManager : MonoBehaviour
 
         if (reg)
         {
+            PlayerPrefs.SetString("namePlayer", nombre);
+            PlayerPrefs.SetString("password", password);
             SceneManager.LoadScene("ChooseLevelScene");
         }
         else

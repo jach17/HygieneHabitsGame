@@ -32,4 +32,11 @@ public class ChooseLevelManager : MonoBehaviour
     {
         SceneManager.LoadScene("Level5-2");
     }
+
+    public void SignOut()
+    {
+        PlayerPrefs.DeleteKey("namePlayer");
+        PlayerPrefs.DeleteKey("password");
+        SceneManager.LoadScene("LoginScene");
+    }
 }
