@@ -45,6 +45,9 @@ public class Level1Minigame : MonoBehaviour
     private GameObject ServicesGameObject;
     Services services;
 
+    [SerializeField]
+    private GameObject winMenu;
+
     private bool levelFinished;
     // Start is called before the first frame update
     void Start()
@@ -71,6 +74,7 @@ public class Level1Minigame : MonoBehaviour
             levelFinished = true;
             
             services.PostReport(points.ToString(), 1);
+            winMenu.SetActive(true);
             return;
         }
 
@@ -81,6 +85,7 @@ public class Level1Minigame : MonoBehaviour
             levelFinished = true;
             
             services.PostReport(points.ToString(), 1);
+            winMenu.SetActive(true);
             return;
         }
         else

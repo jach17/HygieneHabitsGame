@@ -42,6 +42,9 @@ public class Level2Min2Manager : MonoBehaviour
     private GameObject ServicesGameObject;
     Services services;
     private bool levelFinished;
+
+    [SerializeField]
+    private GameObject winMenu;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +69,7 @@ public class Level2Min2Manager : MonoBehaviour
             StopAllCoroutines();
             levelFinished = true;
             services.PostReport(points.ToString(),3);
+            winMenu.SetActive(true);
             return;
         }
         if (time <= 0 && !levelFinished)
@@ -73,6 +77,7 @@ public class Level2Min2Manager : MonoBehaviour
             StopAllCoroutines();
             levelFinished = true;
             services.PostReport(points.ToString(), 3);
+            winMenu.SetActive(true);
             time = 0;
             return;
         }

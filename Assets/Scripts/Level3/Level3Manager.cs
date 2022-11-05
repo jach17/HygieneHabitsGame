@@ -46,7 +46,8 @@ public class Level3Manager : MonoBehaviour
     Services services;
 
     private bool moveRandom;
-
+    [SerializeField]
+    private GameObject winMenu;
     public bool MoveRandom
     {
         get { return moveRandom; }
@@ -78,6 +79,7 @@ public class Level3Manager : MonoBehaviour
             StopAllCoroutines();
             levelFinished = true;
             services.PostReport(points.ToString(), 4);
+            winMenu.SetActive(true);
             return;
         }
         if (time <= 0 && !levelFinished)
@@ -85,6 +87,7 @@ public class Level3Manager : MonoBehaviour
             StopAllCoroutines();
             levelFinished = true;
             services.PostReport(points.ToString(), 4);
+            winMenu.SetActive(true);
             time = 0;
             return;
         }
