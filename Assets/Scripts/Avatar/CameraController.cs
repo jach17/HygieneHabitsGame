@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField]
     private Transform player;
-    private Vector3 offset = new Vector3(-0.19f, 2.64f, -1.47f);
+    private Vector3 offset = new Vector3(-0.2f, 3.0f, -1.5f);
     // Start is called before the first frame update
     void Start()
     {
