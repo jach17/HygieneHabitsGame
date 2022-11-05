@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class Level2Mini1 : MonoBehaviour
 {
@@ -29,13 +31,24 @@ public class Level2Mini1 : MonoBehaviour
     [SerializeField]
     private GameObject[] hazards;
 
-    private float puntos;
+    private float points;
+    [SerializeField]
+    private float maxPoints = 15;
 
     [SerializeField]
     private AudioSource audioSource;
+    [SerializeField]
+    private GameObject ServicesGameObject;
+    Services services;
+    private bool levelFinished;
     // Start is called before the first frame update
     void Start()
     {
+        services = ServicesGameObject.GetComponent<Services>();
+        string dateStartLevel = DateTime.Now.ToString().Replace("/", "-");
+        PlayerPrefs.SetString("dateStartLevel", dateStartLevel);
+        PlayerPrefs.Save();
+
         StartCoroutine(SpawnWavesUp());
         StartCoroutine(SpawnWavesDown());
     }
@@ -43,9 +56,25 @@ public class Level2Mini1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (time <= 0)
+        if (levelFinished)
         {
+            return;
+        }
+        if (points == maxPoints && !levelFinished)
+        {
+            StopAllCoroutines();
+            levelFinished = true;
+            services.PostReport(points.ToString(), 2);
+            return;
+        }
+
+        if (time <= 0 && !levelFinished)
+        {
+            StopAllCoroutines();
+            levelFinished = true;
             time = 0;
+            services.PostReport(points.ToString(), 2);
+            return;
         }
         else
         {
@@ -53,15 +82,23 @@ public class Level2Mini1 : MonoBehaviour
         }
        
         txtTime.text = time.ToString("F2");
+
     }
 
     public void AddPunto()
     {
-        puntos++;
+        points++;
         audioSource.Play();
-        txtPuntos.text = "Puntos: " + puntos.ToString();
+        txtPuntos.text = "Puntos: " + points.ToString();
+
     }
 
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteKey("activeSesion");
+        PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
+        PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
+    }
     IEnumerator SpawnWavesUp()
     {
         yield return new WaitForSeconds(startWaitUp);
