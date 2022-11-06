@@ -26,6 +26,23 @@ public class MenuPausa : MonoBehaviour
     {
         SceneManager.LoadScene("Level5-2");
     }
+    public void PlayLevel1()
+    {
+        SceneManager.LoadScene("Level1-1");
+    }
+    public void PlayLevel21()
+    {
+        SceneManager.LoadScene("Level2-1");
+    }
+    public void PlayLevel22()
+    {
+        SceneManager.LoadScene("Level2-2");
+    }
+    public void PlayLevel3()
+    {
+        SceneManager.LoadScene("Level3-1");
+    }
+
     public void Return()
     {
         SceneManager.LoadScene("ChooseLevelScene");

@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Level3Manager : MonoBehaviour
 {
@@ -30,14 +32,22 @@ public class Level3Manager : MonoBehaviour
     private GameObject currentSoap;
     private DishController dishController;
     private GameObject currentDish;
-    private float puntos;
+    private float points;
     private int index = 0;
+    private bool levelFinished;
+    [SerializeField]
+    private float maxPoints = 15;
 
     [SerializeField]
     private AudioSource audioSource;
 
-    private bool moveRandom;
+    [SerializeField]
+    private GameObject ServicesGameObject;
+    Services services;
 
+    private bool moveRandom;
+    [SerializeField]
+    private GameObject winMenu;
     public bool MoveRandom
     {
         get { return moveRandom; }
@@ -47,6 +57,11 @@ public class Level3Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        services = ServicesGameObject.GetComponent<Services>();
+        string dateStartLevel = DateTime.Now.ToString().Replace("/", "-");
+        PlayerPrefs.SetString("dateStartLevel", dateStartLevel);
+        PlayerPrefs.Save();
+
         dishes.Shuffle();
         StartCoroutine(SpawnFirtsDish());
     }
@@ -54,14 +69,27 @@ public class Level3Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveRandom = false;
-        if (dishesToWash == 0)
+        if (levelFinished)
         {
             return;
         }
-        if (time <= 0)
+        MoveRandom = false;
+        if (points == maxPoints && !levelFinished)
         {
+            StopAllCoroutines();
+            levelFinished = true;
+            services.PostReport(points.ToString(), 4);
+            winMenu.SetActive(true);
+            return;
+        }
+        if (time <= 0 && !levelFinished)
+        {
+            StopAllCoroutines();
+            levelFinished = true;
+            services.PostReport(points.ToString(), 4);
+            winMenu.SetActive(true);
             time = 0;
+            return;
         }
         else
         {
@@ -69,6 +97,10 @@ public class Level3Manager : MonoBehaviour
         }
 
         txtTime.text = time.ToString("F2");
+
+
+
+
 
         //DishController dishController = dishes[index].GetComponent<DishController>();
 
@@ -81,7 +113,7 @@ public class Level3Manager : MonoBehaviour
         {
             NextDish();
         }
-        
+
         /*DishController dishController = dishes[index].GetComponent<DishController>();
         Debug.Log(dishes[index].transform.childCount);
         if (dishController.CanDelete)
@@ -98,6 +130,13 @@ public class Level3Manager : MonoBehaviour
         }*/
     }
 
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteKey("activeSesion");
+        PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
+        PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
+    }
+
     public void NextDish()
     {
         dishesToWash--;
@@ -105,10 +144,18 @@ public class Level3Manager : MonoBehaviour
         Destroy(currentDish);
         Destroy(currentSoap);
         index++;
-        puntos++;
+        points++;
         audioSource.Play();
-        txtPuntos.text = "Puntos: " + puntos.ToString();
+        txtPuntos.text = "Puntos: " + points.ToString();
 
+        if (points == maxPoints)
+        {
+            levelFinished = true;
+        }
+        if (levelFinished)
+        {
+            return;
+        }
         index = Random.Range(0, 9);
         currentDish = Instantiate(dishes[index], spawnValues, Quaternion.identity);
         dishController = currentDish.GetComponent<DishController>();
@@ -121,7 +168,7 @@ public class Level3Manager : MonoBehaviour
         }
         else
         {
-            currentSoap = Instantiate(soap, new Vector2(Random.Range(4.41f ,8.37f), Random.Range(2.51f, -3.32f)), Quaternion.identity);
+            currentSoap = Instantiate(soap, new Vector2(Random.Range(4.41f, 8.37f), Random.Range(2.51f, -3.32f)), Quaternion.identity);
         }
     }
 
