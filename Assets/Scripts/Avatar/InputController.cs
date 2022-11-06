@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    [SerializeField]
-    Transform cam;
+    
+    
+    
+    
+    
+    //[SerializeField]
+    //Transform cam;
     [SerializeField]
     private Joystick joystickMove;
     private Rigidbody rb;
     private float rotateV;
     private float rotateH;
     [SerializeField]
-    private float speed = 10f;
+    private float speed = 1f;
     [SerializeField]
     private GameObject meshGameobject;
     private Animator animator;
@@ -21,7 +26,7 @@ public class InputController : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody>();
         animator = meshGameobject.GetComponent<Animator>();
-        cam = Camera.main.transform;
+       // cam = Camera.main.transform;
     }
 
     void Move()
