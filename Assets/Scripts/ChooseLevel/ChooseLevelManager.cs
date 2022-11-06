@@ -1,10 +1,21 @@
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using SimpleJSON;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class ChooseLevelManager : MonoBehaviour
 {
+    private void Start()
+    {
+        
+    }
+
     [SerializeField] private GameObject m_MenuPausa, m_Pausa;
     public void PlayHome()
     {
@@ -14,12 +25,12 @@ public class ChooseLevelManager : MonoBehaviour
     {
         SceneManager.LoadScene("Level1-1");
     }
-    
+
     public void PlayLeve2()
     {
         SceneManager.LoadScene("Level2-1");
     }
-    
+
     public void PlayLeve3()
     {
         SceneManager.LoadScene("Level2-2");
@@ -33,10 +44,6 @@ public class ChooseLevelManager : MonoBehaviour
         SceneManager.LoadScene("Level5-2");
     }
 
-    public void SignOut()
-    {
-        PlayerPrefs.DeleteKey("namePlayer");
-        PlayerPrefs.DeleteKey("password");
-        SceneManager.LoadScene("LoginScene");
-    }
+    
 }
+
