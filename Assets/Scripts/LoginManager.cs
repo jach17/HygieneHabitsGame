@@ -40,7 +40,7 @@ public class LoginManager : MonoBehaviour
     //Comment to test git
     void Start()
     {
-        GetAccount();
+      
 
     }
 
@@ -48,19 +48,6 @@ public class LoginManager : MonoBehaviour
     //Comment to test AlexBranch
     void Update()
     {
-
-    }
-
-    //Metodo que se llama cuando se pulsa el boton de play
-    public void Play()
-    {
-        Debug.Log("Play");
-    }
-
-    //Metodo que se llama cuando se pulsa el boton de Crear cuenta
-    public void SignUp()
-    {
-        Debug.Log("SignUp");
 
     }
 
@@ -160,7 +147,7 @@ public class LoginManager : MonoBehaviour
         {
             
         }*/
-
+        
         PostPlayer(user, password, edad, idtutor, token);
         
     }
@@ -172,8 +159,8 @@ public class LoginManager : MonoBehaviour
     
     IEnumerator PostAuthPlayer_Coroutine(String user,String password, bool autoLogin)
     {
-        String url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/auth/player";
-
+        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/auth/player";
+        int idPlayer = 0;
         AuthUser usr = new AuthUser(user,password);
         var json = JsonConvert.SerializeObject(usr);
 
@@ -194,6 +181,7 @@ public class LoginManager : MonoBehaviour
                 //JObject data = JObject.Parse(response);
                 JSONNode info = JSON.Parse(webRequest.downloadHandler.text);
                 reg = info["message"]["response"][0]["isRegistred"];
+                idPlayer = info["message"]["response"][0]["idPlayer"];
                 break;
             case UnityWebRequest.Result.ConnectionError:
                 Debug.Log(webRequest.downloadHandler.text);
@@ -205,6 +193,7 @@ public class LoginManager : MonoBehaviour
             {
                 PlayerPrefs.SetString("namePlayer", user);
                 PlayerPrefs.SetString("password", password);
+                PlayerPrefs.SetInt("idPlayer",idPlayer);
                 PlayerPrefs.Save();
             }
             SceneManager.LoadScene("ChooseLevelScene");
@@ -220,6 +209,7 @@ public class LoginManager : MonoBehaviour
     {
         String url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/add/player";
         int idTutor = Convert.ToInt32(id);
+        int idPlayer = 0;
         Player player = new Player(nombre,password,edad,idTutor,token);
         var json = JsonConvert.SerializeObject(player);
 
@@ -240,6 +230,7 @@ public class LoginManager : MonoBehaviour
                 JObject data = JObject.Parse(response);
                 JSONNode info = JSON.Parse(webRequest.downloadHandler.text);
                 reg = info["message"]["response"][0]["inserted"];
+                idPlayer = info["message"]["response"][0]["insertedId"];
                 break;
             case UnityWebRequest.Result.ConnectionError:
                 Debug.Log(webRequest.downloadHandler.text);
@@ -250,6 +241,7 @@ public class LoginManager : MonoBehaviour
         {
             PlayerPrefs.SetString("namePlayer", nombre);
             PlayerPrefs.SetString("password", password);
+            PlayerPrefs.SetInt("idPlayer", idPlayer);
             SceneManager.LoadScene("ChooseLevelScene");
         }
         else
