@@ -25,7 +25,10 @@ public class ChooseLevelManager : MonoBehaviour
     {
         SceneManager.LoadScene("Level1-1");
     }
-
+    public void PlayHabitacion()
+    {
+        SceneManager.LoadScene("Habitacion");
+    }
     public void PlayLeve2()
     {
         SceneManager.LoadScene("Level2-1");
