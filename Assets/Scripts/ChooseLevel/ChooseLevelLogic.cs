@@ -48,5 +48,10 @@ public class ChooseLevelLogic : MonoBehaviour
         PlayerPrefs.DeleteKey("namePlayer");
         PlayerPrefs.DeleteKey("password");
         SceneManager.LoadScene("LoginScene");
+        PlayerPrefs.DeleteKey("statusLevel1");
+        PlayerPrefs.DeleteKey("statusLevel2");
+        PlayerPrefs.DeleteKey("statusLevel3");
+        PlayerPrefs.DeleteKey("statusLevel4");
+        PlayerPrefs.DeleteKey("statusLevel5");
     }
 }

@@ -75,6 +75,12 @@ public class Level1Minigame : MonoBehaviour
             
             services.PostReport(points.ToString(), 1);
             winMenu.SetActive(true);
+            
+            if (PlayerPrefs.GetInt("statusLevel2") == 0)
+            {
+                PlayerPrefs.SetInt("statusLevel2",1);
+                services.UpdateLevelStatus("2");
+            }
             return;
         }
 

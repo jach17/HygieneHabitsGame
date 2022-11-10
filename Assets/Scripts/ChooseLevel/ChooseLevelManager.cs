@@ -23,7 +23,7 @@ public class ChooseLevelManager : MonoBehaviour
     }
     public void PlayLeve1()
     {
-        SceneManager.LoadScene("Level1-1");
+        SceneManager.LoadScene("Level1");
     }
     public void PlayHabitacion()
     {
@@ -31,7 +31,16 @@ public class ChooseLevelManager : MonoBehaviour
     }
     public void PlayLeve2()
     {
-        SceneManager.LoadScene("Level2-1");
+        if (PlayerPrefs.GetInt("statusLevel2") == 1)
+        {
+            SceneManager.LoadScene("Level2");
+        }
+        else
+        {
+            Debug.Log(PlayerPrefs.GetInt("statusLevel2"));
+            Debug.Log("BLOQUEADO");
+        }
+        
     }
 
     public void PlayLeve3()
