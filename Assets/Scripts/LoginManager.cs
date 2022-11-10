@@ -182,6 +182,7 @@ public class LoginManager : MonoBehaviour
                 JSONNode info = JSON.Parse(webRequest.downloadHandler.text);
                 reg = info["message"]["response"][0]["isRegistred"];
                 idPlayer = info["message"]["response"][0]["idPlayer"];
+                Debug.Log(info);
                 break;
             case UnityWebRequest.Result.ConnectionError:
                 Debug.Log(webRequest.downloadHandler.text);
@@ -242,7 +243,7 @@ public class LoginManager : MonoBehaviour
             PlayerPrefs.SetString("namePlayer", nombre);
             PlayerPrefs.SetString("password", password);
             PlayerPrefs.SetInt("idPlayer", idPlayer);
-            SceneManager.LoadScene("ChooseLevelScene");
+            SceneManager.LoadScene("LoadingScene");
         }
         else
         {

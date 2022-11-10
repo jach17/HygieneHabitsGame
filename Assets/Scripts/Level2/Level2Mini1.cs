@@ -69,6 +69,7 @@ public class Level2Mini1 : MonoBehaviour
             levelFinished = true;
             services.PostReport(points.ToString(), 2);
             winMenu.SetActive(true);
+            
             return;
         }
 

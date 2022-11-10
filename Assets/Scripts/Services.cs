@@ -13,11 +13,13 @@ public class Services : MonoBehaviour
 {
     private bool reg;
 
+    public void GetUserById() => StartCoroutine(GetUserById_Coroutine());
     public void PostReport(string currentScoreLevel, int idLevelPlayed) => StartCoroutine(PostReport_Coroutine(currentScoreLevel, idLevelPlayed));
     public void PostSesion(string dateStart, string dateEnd) => StartCoroutine(PostSesion_Coroutine(dateStart, dateEnd));
     public void UpdateSesion() => StartCoroutine(UpdateSesion_Coroutine());
 
     public void PostAuth(string user, String password) => StartCoroutine(PostAuthPlayer_Coroutine(user, password));
+    public void UpdateLevelStatus(string level) => StartCoroutine(UpdateLevelStatus_Coroutine(level));
 
     IEnumerator PostAuthPlayer_Coroutine(String user, String password)
     {
@@ -42,6 +44,7 @@ public class Services : MonoBehaviour
                 //String response = webRequest.downloadHandler.text;
                 //JObject data = JObject.Parse(response);
                 JSONNode info = JSON.Parse(webRequest.downloadHandler.text);
+                Debug.Log(info);
                 reg = info["message"]["response"][0]["isRegistred"];
                 break;
             case UnityWebRequest.Result.ConnectionError:
@@ -50,8 +53,7 @@ public class Services : MonoBehaviour
         }
         if (isRegistred())
         {
-
-            SceneManager.LoadScene("ChooseLevelScene");
+            GetUserById();
         }
         else
         {
@@ -148,8 +150,6 @@ public class Services : MonoBehaviour
     IEnumerator UpdateSesion_Coroutine()
     {
         string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/update/sesion/" + PlayerPrefs.GetInt("oldSesion").ToString();
-        Debug.Log(PlayerPrefs.GetInt("idSesion"));
-        Debug.Log(PlayerPrefs.GetInt("oldSesion"));
 
         dateEndc date = new dateEndc(PlayerPrefs.GetString("dateEnd"));
         var json = JsonConvert.SerializeObject(date);
@@ -158,6 +158,39 @@ public class Services : MonoBehaviour
         webRequest.SetRequestHeader("Content-Type", "application/json");
         byte[] rawData = Encoding.UTF8.GetBytes(json);
         webRequest.uploadHandler = new UploadHandlerRaw(rawData);
+        webRequest.downloadHandler = new DownloadHandlerBuffer();
+        yield return webRequest.SendWebRequest();
+
+        switch (webRequest.result)
+        {
+            case UnityWebRequest.Result.InProgress:
+                break;
+            case UnityWebRequest.Result.Success:
+                //String response = webRequest.downloadHandler.text;
+                //JObject data = JObject.Parse(response);
+                JSONNode info = JSON.Parse(webRequest.downloadHandler.text);
+                //Debug.Log(info);
+
+                break;
+            case UnityWebRequest.Result.ConnectionError:
+                Debug.Log(webRequest.downloadHandler.text);
+                break;
+        }
+        PlayerPrefs.DeleteKey("dateEnd");
+        yield break;
+    }
+
+    IEnumerator UpdateLevelStatus_Coroutine(string level)
+    {
+        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/enable/level/" + level + "/player/" + PlayerPrefs.GetInt("idPlayer");
+
+        dateEndc date = new dateEndc(PlayerPrefs.GetString("dateEnd"));
+        var json = JsonConvert.SerializeObject(date);
+
+        using UnityWebRequest webRequest = UnityWebRequest.Post(url, "UPDATE");
+        //webRequest.SetRequestHeader("Content-Type", "application/json");
+        //byte[] rawData = Encoding.UTF8.GetBytes(json);
+        //webRequest.uploadHandler = new UploadHandlerRaw(rawData);
         webRequest.downloadHandler = new DownloadHandlerBuffer();
         yield return webRequest.SendWebRequest();
 
@@ -178,6 +211,32 @@ public class Services : MonoBehaviour
         }
         PlayerPrefs.DeleteKey("dateEnd");
         yield break;
+    }
+
+    IEnumerator GetUserById_Coroutine()
+    {
+        JSONNode itemsData;
+        String url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/list/player/" + PlayerPrefs.GetInt("idPlayer").ToString();
+        using (UnityWebRequest request = UnityWebRequest.Get(url))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.ConnectionError)
+            {
+                Debug.Log(request.error);
+            }
+            else
+            {
+                itemsData = JSON.Parse(request.downloadHandler.text);
+                PlayerPrefs.SetInt("statusLevel1", itemsData["message"]["response"][0]["statusLevel1"]);
+                PlayerPrefs.SetInt("statusLevel2", itemsData["message"]["response"][0]["statusLevel2"]);
+                PlayerPrefs.SetInt("statusLevel3", itemsData["message"]["response"][0]["statusLevel3"]);
+                PlayerPrefs.SetInt("statusLevel4", itemsData["message"]["response"][0]["statusLevel4"]);
+                PlayerPrefs.SetInt("statusLevel5", itemsData["message"]["response"][0]["statusLevel5"]);
+                Debug.Log(itemsData);
+            }
+        }
+        SceneManager.LoadScene("ChooseLevelScene");
     }
 }
 
