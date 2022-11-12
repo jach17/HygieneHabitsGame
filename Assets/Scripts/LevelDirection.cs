@@ -5,4 +5,5 @@ using UnityEngine;
 public static class LevelDirection
 {
     public static string Level { get; set; }
+
 }
