@@ -12,6 +12,8 @@ public class Level3Manager : MonoBehaviour
     [SerializeField]
     private TMP_Text txtPuntos;
     [SerializeField]
+    private TMP_Text txtPuntosWin;
+    [SerializeField]
     private float time;
 
     [SerializeField]
@@ -48,6 +50,8 @@ public class Level3Manager : MonoBehaviour
     private bool moveRandom;
     [SerializeField]
     private GameObject winMenu;
+    [SerializeField]
+    private GameObject loseMenu;
     public bool MoveRandom
     {
         get { return moveRandom; }
@@ -79,6 +83,7 @@ public class Level3Manager : MonoBehaviour
             StopAllCoroutines();
             levelFinished = true;
             services.PostReport(points.ToString(), 4);
+            txtPuntosWin.text = points.ToString();
             winMenu.SetActive(true);
             return;
         }
@@ -87,7 +92,7 @@ public class Level3Manager : MonoBehaviour
             StopAllCoroutines();
             levelFinished = true;
             services.PostReport(points.ToString(), 4);
-            winMenu.SetActive(true);
+            loseMenu.SetActive(true);
             time = 0;
             return;
         }

@@ -44,6 +44,12 @@ public class Level2Mini1 : MonoBehaviour
 
     [SerializeField]
     private GameObject winMenu;
+
+    [SerializeField]
+    private GameObject loseMenu;
+
+    [SerializeField]
+    private TMP_Text txtPointsWin;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +74,7 @@ public class Level2Mini1 : MonoBehaviour
             StopAllCoroutines();
             levelFinished = true;
             services.PostReport(points.ToString(), 2);
+            txtPointsWin.text = "Puntuación: " + points.ToString();
             winMenu.SetActive(true);
             
             return;
@@ -79,7 +86,7 @@ public class Level2Mini1 : MonoBehaviour
             levelFinished = true;
             time = 0;
             services.PostReport(points.ToString(), 2);
-            winMenu.SetActive(true);
+            loseMenu.SetActive(true);
             return;
         }
         else
