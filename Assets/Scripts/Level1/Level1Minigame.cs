@@ -20,6 +20,8 @@ public class Level1Minigame : MonoBehaviour
     private TMP_Text txtPoints;
     [SerializeField]
     private TMP_Text txtTime;
+    [SerializeField]
+    private TMP_Text txtPointsWin;
 
     [SerializeField]
     private int hazardCount;
@@ -48,6 +50,9 @@ public class Level1Minigame : MonoBehaviour
     [SerializeField]
     private GameObject winMenu;
 
+    [SerializeField]
+    private GameObject loseMenu;
+
     private bool levelFinished;
     // Start is called before the first frame update
     void Start()
@@ -74,6 +79,7 @@ public class Level1Minigame : MonoBehaviour
             levelFinished = true;
             
             services.PostReport(points.ToString(), 1);
+            txtPointsWin.text = "Puntuación: " + points.ToString();
             winMenu.SetActive(true);
             
             if (PlayerPrefs.GetInt("statusLevel2") == 0)
@@ -91,7 +97,7 @@ public class Level1Minigame : MonoBehaviour
             levelFinished = true;
             
             services.PostReport(points.ToString(), 1);
-            winMenu.SetActive(true);
+            loseMenu.SetActive(true);
             return;
         }
         else

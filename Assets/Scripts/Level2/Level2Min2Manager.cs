@@ -14,6 +14,8 @@ public class Level2Min2Manager : MonoBehaviour
     [SerializeField]
     private TMP_Text txtPuntos;
     [SerializeField]
+    private TMP_Text txtPointsWin;
+    [SerializeField]
     private float time;
 
 
@@ -45,6 +47,9 @@ public class Level2Min2Manager : MonoBehaviour
 
     [SerializeField]
     private GameObject winMenu;
+
+    [SerializeField]
+    private GameObject loseMenu;
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +74,7 @@ public class Level2Min2Manager : MonoBehaviour
             StopAllCoroutines();
             levelFinished = true;
             services.PostReport(points.ToString(),3);
+            txtPointsWin.text = points.ToString();
             winMenu.SetActive(true);
             return;
         }
@@ -77,8 +83,9 @@ public class Level2Min2Manager : MonoBehaviour
             StopAllCoroutines();
             levelFinished = true;
             services.PostReport(points.ToString(), 3);
-            winMenu.SetActive(true);
+            loseMenu.SetActive(true);
             time = 0;
+            
             return;
         }
         else{
