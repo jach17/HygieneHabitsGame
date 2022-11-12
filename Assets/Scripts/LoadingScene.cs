@@ -29,7 +29,8 @@ public class LoadingScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (LevelDirection.Level == "LoadingScene")
+
+        if (LevelDirection.Level == null)
         {
             services = servicesGameObject.GetComponent<Services>();
             StartCoroutine(Wait());
