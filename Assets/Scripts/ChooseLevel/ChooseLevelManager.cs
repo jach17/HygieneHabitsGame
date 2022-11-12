@@ -23,14 +23,20 @@ public class ChooseLevelManager : MonoBehaviour
     }
     public void PlayLeve1()
     {
-        SceneManager.LoadScene("Level1");
+        LevelDirection.Level = "Level1";
+        SceneManager.LoadScene("LoadingScene");
     }
-    
+    public void PlayLevel11()
+    {
+        LevelDirection.Level = "Level1-1";
+        SceneManager.LoadScene("LoadingScene");
+    }
     public void PlayLeve2()
     {
         if (PlayerPrefs.GetInt("statusLevel2") == 1)
         {
-            SceneManager.LoadScene("Level2");
+            LevelDirection.Level = "Level2";
+            SceneManager.LoadScene("LoadingScene");
         }
         else
         {
@@ -42,7 +48,8 @@ public class ChooseLevelManager : MonoBehaviour
 
     public void PlayLeve3()
     {
-        SceneManager.LoadScene("Level3");
+        LevelDirection.Level = "Level3";
+        SceneManager.LoadScene("LoadingScene");
     }
     public void PlayLeve2Prueba()
     {
@@ -50,11 +57,13 @@ public class ChooseLevelManager : MonoBehaviour
     }
     public void PlayLeve4()
     {
-        SceneManager.LoadScene("Level4-1");
+        LevelDirection.Level = "Level4-1";
+        SceneManager.LoadScene("LoadingScene");
     }
     public void PlayLeve5()
     {
-        SceneManager.LoadScene("Level5-2");
+        LevelDirection.Level = "Level5-2";
+        SceneManager.LoadScene("LoadingScene");
     }
 
     
