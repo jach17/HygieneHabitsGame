@@ -76,6 +76,11 @@ public class Level2Min2Manager : MonoBehaviour
             services.PostReport(points.ToString(),3);
             txtPointsWin.text = points.ToString();
             winMenu.SetActive(true);
+            if (PlayerPrefs.GetInt("statusLevel3") == 0)
+            {
+                PlayerPrefs.SetInt("statusLevel3", 1);
+                services.UpdateLevelStatus("3");
+            }
             return;
         }
         if (time <= 0 && !levelFinished)
