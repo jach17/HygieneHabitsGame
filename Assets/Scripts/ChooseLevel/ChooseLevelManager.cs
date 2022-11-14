@@ -38,18 +38,17 @@ public class ChooseLevelManager : MonoBehaviour
             LevelDirection.Level = "Level2";
             SceneManager.LoadScene("LoadingScene");
         }
-        else
-        {
-            Debug.Log(PlayerPrefs.GetInt("statusLevel2"));
-            Debug.Log("BLOQUEADO");
-        }
         
     }
 
     public void PlayLeve3()
     {
-        LevelDirection.Level = "Level3";
-        SceneManager.LoadScene("LoadingScene");
+        if (PlayerPrefs.GetInt("statusLevel3") == 1)
+        {
+            LevelDirection.Level = "Level3";
+            SceneManager.LoadScene("LoadingScene");
+        }
+        
     }
     public void PlayLeve2Prueba()
     {
@@ -57,7 +56,7 @@ public class ChooseLevelManager : MonoBehaviour
     }
     public void PlayLeve4()
     {
-        LevelDirection.Level = "Level4-1";
+        LevelDirection.Level = "Level4";
         SceneManager.LoadScene("LoadingScene");
     }
     public void PlayLeve5()

@@ -85,6 +85,11 @@ public class Level3Manager : MonoBehaviour
             services.PostReport(points.ToString(), 4);
             txtPuntosWin.text = points.ToString();
             winMenu.SetActive(true);
+            if (PlayerPrefs.GetInt("statusLevel4") == 0)
+            {
+                PlayerPrefs.SetInt("statusLevel4", 1);
+                services.UpdateLevelStatus("4");
+            }
             return;
         }
         if (time <= 0 && !levelFinished)
