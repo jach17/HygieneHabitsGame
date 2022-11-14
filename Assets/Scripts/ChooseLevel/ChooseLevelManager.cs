@@ -54,6 +54,18 @@ public class ChooseLevelManager : MonoBehaviour
     {
         SceneManager.LoadScene("Level2");
     }
+    public void PlayLeve3Prueba()
+    {
+        SceneManager.LoadScene("Level3");
+    }
+    public void PlayLeve4Prueba()
+    {
+        SceneManager.LoadScene("Level4");
+    }
+    public void PlayLeve5Prueba()
+    {
+        SceneManager.LoadScene("Level5");
+    }
     public void PlayLeve4()
     {
         LevelDirection.Level = "Level4";
@@ -61,10 +73,14 @@ public class ChooseLevelManager : MonoBehaviour
     }
     public void PlayLeve5()
     {
+        LevelDirection.Level = "Level5";
+        SceneManager.LoadScene("LoadingScene");
+    }
+    public void PlayLeve5_2()
+    {
         LevelDirection.Level = "Level5-2";
         SceneManager.LoadScene("LoadingScene");
     }
 
-    
 }
 
