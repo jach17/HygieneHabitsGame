@@ -33,7 +33,11 @@ public class LoadingScene : MonoBehaviour
         if (LevelDirection.Level == null)
         {
             services = servicesGameObject.GetComponent<Services>();
-            StartCoroutine(Wait());
+
+            //StartCoroutine(Wait());
+            StartCoroutine(CheckInternet_Coroutine());
+
+
         }
         else
         {
@@ -56,6 +60,25 @@ public class LoadingScene : MonoBehaviour
         }
 
     }
+    IEnumerator CheckInternet_Coroutine()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        yield return request.SendWebRequest();
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion");
+            StopAllCoroutines();
+            btnTry.gameObject.SetActive(true);
+            timeFinished = true;
+        }
+        else
+        {
+            Debug.Log("Conexion");
+            StartCoroutine(Wait());
+        }
+    }
+
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(1f);
@@ -118,11 +141,15 @@ public class LoadingScene : MonoBehaviour
 
     public void Connect()
     {
-        time = 6f;
+        StopAllCoroutines();
+        time = 7f;
         btnTry.gameObject.SetActive(false);
         timeFinished = false;
-        services.PostAuth(namePlayer, password);
+        //services.PostAuth(namePlayer, password);
+        StartCoroutine(CheckInternet_Coroutine());
 
     }
+
+
 }
 
