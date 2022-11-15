@@ -23,6 +23,7 @@ public class ChooseLevelLogic : MonoBehaviour
         
         if (PlayerPrefs.GetString("activeSesion") == "")
         {
+            Debug.Log("postsesion");
             services.PostSesion(DateTime.Now.ToString().Replace("/", "-"), "");
             PlayerPrefs.SetString("activeSesion", "true");
             PlayerPrefs.Save();
