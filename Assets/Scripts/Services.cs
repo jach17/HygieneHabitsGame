@@ -14,6 +14,7 @@ public class Services : MonoBehaviour
     private bool reg;
     private bool getStatusUserById;
     private bool getStatusAuth;
+    private bool isConnected;
     public void GetUserById() => StartCoroutine(GetUserById_Coroutine());
 
     /*public bool GetUserById()
@@ -38,6 +39,22 @@ public class Services : MonoBehaviour
     public void PostAuth(string user, string password) => StartCoroutine(PostAuthPlayer_Coroutine(user, password));
 
     public void UpdateLevelStatus(string level) => StartCoroutine(UpdateLevelStatus_Coroutine(level));
+    /*public bool CheckConnection()
+    {
+        StartCoroutine(CheckInternet_Coroutine((isConnected) =>
+        {
+            if (isConnected)
+            {
+                isConnected = true;
+            }
+            else
+            {
+                isConnected = false;
+            }
+        }));
+
+        return isConnected;
+    }*/
 
     IEnumerator PostAuthPlayer_Coroutine(string user, string password)
     {
@@ -65,12 +82,12 @@ public class Services : MonoBehaviour
                 JSONNode info = JSON.Parse(webRequest.downloadHandler.text);
                 //Debug.Log(info);
                 reg = info["message"]["response"][0]["isRegistred"];
-                
+
                 break;
             case UnityWebRequest.Result.ConnectionError:
                 Debug.Log(webRequest.downloadHandler.text);
                 Debug.Log("ERROR");
-               
+
                 break;
         }
         if (isRegistred())
@@ -157,6 +174,7 @@ public class Services : MonoBehaviour
                 int idSesion = info["message"]["response"][0]["insertedId"];
                 PlayerPrefs.SetInt("idSesion", idSesion);
                 PlayerPrefs.Save();
+                Debug.Log(info);
                 break;
             case UnityWebRequest.Result.ConnectionError:
                 Debug.Log(webRequest.downloadHandler.text);
@@ -191,7 +209,7 @@ public class Services : MonoBehaviour
                 //String response = webRequest.downloadHandler.text;
                 //JObject data = JObject.Parse(response);
                 JSONNode info = JSON.Parse(webRequest.downloadHandler.text);
-                //Debug.Log(info);
+                Debug.Log(info);
 
                 break;
             case UnityWebRequest.Result.ConnectionError:
@@ -259,9 +277,11 @@ public class Services : MonoBehaviour
                 SceneManager.LoadScene("ChooseLevelScene");
             }
         }
-        
+
         //SceneManager.LoadScene("ChooseLevelScene");
     }
+
+    
 }
 
 [Serializable]
