@@ -8,6 +8,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class ChooseLevelManager : MonoBehaviour
 {
@@ -23,20 +24,21 @@ public class ChooseLevelManager : MonoBehaviour
     }
     public void PlayLeve1()
     {
-        LevelDirection.Level = "Level1";
-        SceneManager.LoadScene("LoadingScene");
+        //LevelDirection.Level = "Level1";
+        StartCoroutine(CheckInternet_Coroutine("Level1"));
     }
     public void PlayLevel11()
     {
-        LevelDirection.Level = "Level1-1";
-        SceneManager.LoadScene("LoadingScene");
+        //LevelDirection.Level = "Level1-1";
+        StartCoroutine(CheckInternet_Coroutine("Level1-1"));
     }
     public void PlayLeve2()
     {
         if (PlayerPrefs.GetInt("statusLevel2") == 1)
         {
-            LevelDirection.Level = "Level2";
-            SceneManager.LoadScene("LoadingScene");
+            //LevelDirection.Level = "Level2";
+            //SceneManager.LoadScene("LoadingScene");
+            StartCoroutine(CheckInternet_Coroutine("Level2"));
         }
         
     }
@@ -45,8 +47,9 @@ public class ChooseLevelManager : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("statusLevel3") == 1)
         {
-            LevelDirection.Level = "Level3";
-            SceneManager.LoadScene("LoadingScene");
+            //LevelDirection.Level = "Level3";
+            //SceneManager.LoadScene("LoadingScene");
+            StartCoroutine(CheckInternet_Coroutine("Level3"));
         }
         
     }
@@ -68,18 +71,39 @@ public class ChooseLevelManager : MonoBehaviour
     }
     public void PlayLeve4()
     {
-        LevelDirection.Level = "Level4";
-        SceneManager.LoadScene("LoadingScene");
+        //LevelDirection.Level = "Level4";
+        //SceneManager.LoadScene("LoadingScene");
+        StartCoroutine(CheckInternet_Coroutine("Level4"));
     }
     public void PlayLeve5()
     {
-        LevelDirection.Level = "Level5";
-        SceneManager.LoadScene("LoadingScene");
+        //LevelDirection.Level = "Level5";
+        //SceneManager.LoadScene("LoadingScene");
+        StartCoroutine(CheckInternet_Coroutine("Level5"));
     }
     public void PlayLeve5_2()
     {
-        LevelDirection.Level = "Level5-2";
-        SceneManager.LoadScene("LoadingScene");
+        //LevelDirection.Level = "Level5-2";
+        //SceneManager.LoadScene("LoadingScene");
+        StartCoroutine(CheckInternet_Coroutine("Level5-2"));
+    }
+
+    IEnumerator CheckInternet_Coroutine(string scene)
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        yield return request.SendWebRequest();
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            LevelDirection.Level = scene;
+            SceneManager.LoadScene("LoadingScene");
+        }
     }
 
 }

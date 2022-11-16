@@ -60,6 +60,18 @@ public class LoadingScene : MonoBehaviour
         }
 
     }
+
+    private void OnApplicationQuit()
+    {
+        if (LevelDirection.Level != null)
+        {
+            PlayerPrefs.DeleteKey("activeSesion");
+            PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
+            PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
+        }
+
+    }
+
     IEnumerator CheckInternet_Coroutine()
     {
         UnityWebRequest request = new UnityWebRequest("http://google.com");
