@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
@@ -72,21 +73,14 @@ public class Level2Mini1 : MonoBehaviour
         if (points == maxPoints && !levelFinished)
         {
             StopAllCoroutines();
-            levelFinished = true;
-            services.PostReport(points.ToString(), 2);
-            txtPointsWin.text = "Puntuación: " + points.ToString();
-            winMenu.SetActive(true);
-            
+            StartCoroutine(CheckInternetWin_Coroutine());
             return;
         }
 
         if (time <= 0 && !levelFinished)
         {
             StopAllCoroutines();
-            levelFinished = true;
-            time = 0;
-            services.PostReport(points.ToString(), 2);
-            loseMenu.SetActive(true);
+            StartCoroutine(CheckInternetLose_Coroutine());
             return;
         }
         else
@@ -142,6 +136,44 @@ public class Level2Mini1 : MonoBehaviour
         }
     }
 
+    IEnumerator CheckInternetWin_Coroutine()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        yield return request.SendWebRequest();
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            levelFinished = true;
+            services.PostReport(points.ToString(), 2);
+            txtPointsWin.text = "Puntuación: " + points.ToString();
+            winMenu.SetActive(true);
+        }
+    }
+    IEnumerator CheckInternetLose_Coroutine()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        yield return request.SendWebRequest();
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            levelFinished = true;
+            time = 0;
+            services.PostReport(points.ToString(), 2);
+            loseMenu.SetActive(true);
+        }
+    }
     public void Return()
     {
         SceneManager.LoadScene("ChooseLevelScene");

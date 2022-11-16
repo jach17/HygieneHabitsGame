@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class Level3Manager : MonoBehaviour
@@ -12,7 +14,7 @@ public class Level3Manager : MonoBehaviour
     [SerializeField]
     private TMP_Text txtPuntos;
     [SerializeField]
-    private TMP_Text txtPuntosWin;
+    private TMP_Text txtPointsWin;
     [SerializeField]
     private float time;
 
@@ -81,24 +83,13 @@ public class Level3Manager : MonoBehaviour
         if (points == maxPoints && !levelFinished)
         {
             StopAllCoroutines();
-            levelFinished = true;
-            services.PostReport(points.ToString(), 4);
-            txtPuntosWin.text = points.ToString();
-            winMenu.SetActive(true);
-            if (PlayerPrefs.GetInt("statusLevel4") == 0)
-            {
-                PlayerPrefs.SetInt("statusLevel4", 1);
-                services.UpdateLevelStatus("4");
-            }
+            StartCoroutine(CheckInternetWin_Coroutine());
             return;
         }
         if (time <= 0 && !levelFinished)
         {
             StopAllCoroutines();
-            levelFinished = true;
-            services.PostReport(points.ToString(), 4);
-            loseMenu.SetActive(true);
-            time = 0;
+            StartCoroutine(CheckInternetLose_Coroutine());
             return;
         }
         else
@@ -197,6 +188,51 @@ public class Level3Manager : MonoBehaviour
         else
         {
             currentSoap = Instantiate(soap, new Vector2(Random.Range(4.41f, 8.37f), Random.Range(2.51f, -3.32f)), Quaternion.identity);
+        }
+    }
+
+    IEnumerator CheckInternetWin_Coroutine()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        yield return request.SendWebRequest();
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            levelFinished = true;
+            services.PostReport(points.ToString(), 4);
+            txtPointsWin.text = points.ToString();
+            winMenu.SetActive(true);
+            if (PlayerPrefs.GetInt("statusLevel4") == 0)
+            {
+                PlayerPrefs.SetInt("statusLevel4", 1);
+                services.UpdateLevelStatus("4");
+            }
+        }
+    }
+
+    IEnumerator CheckInternetLose_Coroutine()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        yield return request.SendWebRequest();
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            levelFinished = true;
+            services.PostReport(points.ToString(), 4);
+            loseMenu.SetActive(true);
+            time = 0;
         }
     }
 }
