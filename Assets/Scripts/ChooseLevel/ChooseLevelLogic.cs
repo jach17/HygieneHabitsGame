@@ -23,10 +23,7 @@ public class ChooseLevelLogic : MonoBehaviour
         
         if (PlayerPrefs.GetString("activeSesion") == "")
         {
-            Debug.Log("postsesion");
-            services.PostSesion(DateTime.Now.ToString().Replace("/", "-"), "");
-            PlayerPrefs.SetString("activeSesion", "true");
-            PlayerPrefs.Save();
+            StartCoroutine(CheckInternetPostSesion_Coroutine());
             
         }
     }
@@ -54,5 +51,25 @@ public class ChooseLevelLogic : MonoBehaviour
         PlayerPrefs.DeleteKey("statusLevel3");
         PlayerPrefs.DeleteKey("statusLevel4");
         PlayerPrefs.DeleteKey("statusLevel5");
+    }
+
+    IEnumerator CheckInternetPostSesion_Coroutine()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        yield return request.SendWebRequest();
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            Debug.Log("postsesion");
+            services.PostSesion(DateTime.Now.ToString().Replace("/", "-"), "");
+            PlayerPrefs.SetString("activeSesion", "true");
+            PlayerPrefs.Save();
+        }
     }
 }

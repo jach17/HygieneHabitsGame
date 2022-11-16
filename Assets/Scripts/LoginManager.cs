@@ -66,7 +66,8 @@ public class LoginManager : MonoBehaviour
     {
         user = PlayerPrefs.GetString("namePlayer");
         password = PlayerPrefs.GetString("password");
-        PostAuth(user, password,true);
+        //PostAuth(user, password,true);
+        StartCoroutine(CheckInternetAuth_Coroutine(true));
     }
 
     //Metodo que se llama cuando se deja de escribir en el txt de usuario
@@ -138,7 +139,8 @@ public class LoginManager : MonoBehaviour
         {
            
         }
-        PostAuth(user, password,false);
+        //PostAuth(user, password,false);
+        StartCoroutine(CheckInternetAuth_Coroutine(false));
         
     }
     public void RegistrarUsuario()
@@ -147,9 +149,9 @@ public class LoginManager : MonoBehaviour
         {
             
         }*/
-        
-        PostPlayer(user, password, edad, idtutor, token);
-        
+
+        //PostPlayer(user, password, edad, idtutor, token);
+        StartCoroutine(CheckInternetPostPlayer_Coroutine());
     }
 
     public void GetUsers() => StartCoroutine(GetUsers_Coroutine());
@@ -290,6 +292,40 @@ public class LoginManager : MonoBehaviour
                 Debug.Log("Edad: " + itemsData["message"]["response"][0]["agePlayer"]);
                 Debug.Log("Tutor: " + itemsData["message"]["response"][0]["idTutorOwner"]);
             }
+        }
+    }
+
+    IEnumerator CheckInternetAuth_Coroutine(bool autologin)
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        yield return request.SendWebRequest();
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            PostAuth(user, password, autologin);
+        }
+    }
+
+    IEnumerator CheckInternetPostPlayer_Coroutine()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        yield return request.SendWebRequest();
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            PostPlayer(user, password, edad, idtutor, token);
         }
     }
 
