@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         m_tablero = GetComponent<Tablero>();
     }
 
-    
+
     private void Singleton()
     {
         if (Instancia == null)
@@ -40,19 +40,28 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         m_tablero.InicializarTablero();
-       
+
 
     }
     void Update()
     {
-        IntentosRestantesTXT.text = "Intentos restantes: " + intentos;              
+        IntentosRestantesTXT.text = "Intentos restantes: " + intentos;
     }
+
+    private void OnApplicationQuit()
+    {
+
+        PlayerPrefs.DeleteKey("activeSesion");
+        PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
+        PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
+    }
+
     //Con este metodo vamos a gestionar la parte logica de el juego
     public void ClickFicha(Card ficha)
     {
         if (!m_PuedeSeleccionaFicha)
-        return;
-        
+            return;
+
 
         if (!UltimaFichaSeleccionada)
         {
@@ -69,7 +78,8 @@ public class GameManager : MonoBehaviour
         UltimaFichaSeleccionada = ficha;
         ficha.MostrarFrente();
     }
-    public void SegundaFichaSeleccionda(Card ficha) {
+    public void SegundaFichaSeleccionda(Card ficha)
+    {
 
         if (ficha == UltimaFichaSeleccionada)
         {
@@ -124,32 +134,32 @@ public class GameManager : MonoBehaviour
         UltimaFichaSeleccionada = null;
         //bloquear seleccion por un momento
         StartCoroutine(BloquearSeleccion(2f));
-        
-       
+
+
 
     }
 
     private void ParIncorrecto(Card ficha, Card ultimaFichaSeleccionada)
     {
         intentos = intentos - 1;
-        if (intentos <=0)
+        if (intentos <= 0)
         {
             StartCoroutine(MostrarPantalladeDerrota());
             m_PuedeSeleccionaFicha = false;
 
         }
-        
+
         UltimaFichaSeleccionada = null;
         StartCoroutine(BloquearAni(1.5f, ficha, ultimaFichaSeleccionada));
         StartCoroutine(SoundError());
         StartCoroutine(BloquearSeleccion(2f));
 
- }
+    }
 
     IEnumerator BloquearSeleccion(float tiempo)
     {
         m_PuedeSeleccionaFicha = false;
-        yield return  new WaitForSeconds(tiempo);
+        yield return new WaitForSeconds(tiempo);
         m_PuedeSeleccionaFicha = true;
     }
     IEnumerator SoundError()
@@ -166,7 +176,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator BloquearAni(float tiempo, Card ficha, Card ultimaFichaSeleccionada)
     {
-       
+
         yield return new WaitForSeconds(tiempo);
         ficha.MostrarReverso();
         ultimaFichaSeleccionada.MostrarReverso();
@@ -211,7 +221,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(BloquearSeleccion(1f));
         m_Pausa.SetActive(true);
         m_MenuPausa.SetActive(false);
-        
+
 
     }
 }

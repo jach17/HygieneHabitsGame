@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
@@ -72,25 +73,13 @@ public class Level2Min2Manager : MonoBehaviour
         if (points == maxPoints && !levelFinished)
         {
             StopAllCoroutines();
-            levelFinished = true;
-            services.PostReport(points.ToString(),3);
-            txtPointsWin.text = points.ToString();
-            winMenu.SetActive(true);
-            if (PlayerPrefs.GetInt("statusLevel3") == 0)
-            {
-                PlayerPrefs.SetInt("statusLevel3", 1);
-                services.UpdateLevelStatus("3");
-            }
+            StartCoroutine(CheckInternetWin_Coroutine());
             return;
         }
         if (time <= 0 && !levelFinished)
         {
             StopAllCoroutines();
-            levelFinished = true;
-            services.PostReport(points.ToString(), 3);
-            loseMenu.SetActive(true);
-            time = 0;
-            
+            StartCoroutine(CheckInternetLose_Coroutine());
             return;
         }
         else{
@@ -145,6 +134,51 @@ public class Level2Min2Manager : MonoBehaviour
                 Instantiate(hazard, spawnPosition, Quaternion.identity);
                 yield return new WaitForSeconds(spawnWaitR);
             }
+        }
+    }
+
+    IEnumerator CheckInternetWin_Coroutine()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        yield return request.SendWebRequest();
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            levelFinished = true;
+            services.PostReport(points.ToString(), 3);
+            txtPointsWin.text = points.ToString();
+            winMenu.SetActive(true);
+            if (PlayerPrefs.GetInt("statusLevel3") == 0)
+            {
+                PlayerPrefs.SetInt("statusLevel3", 1);
+                services.UpdateLevelStatus("3");
+            }
+        }
+    }
+    IEnumerator CheckInternetLose_Coroutine()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        yield return request.SendWebRequest();
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            levelFinished = true;
+            services.PostReport(points.ToString(), 3);
+            loseMenu.SetActive(true);
+            time = 0;
+
         }
     }
 }
