@@ -205,7 +205,7 @@ public class Level3Manager : MonoBehaviour
         else
         {
             levelFinished = true;
-            services.PostReport(points.ToString(), 4);
+            services.PostReport(points.ToString(), 3);
             txtPointsWin.text = points.ToString();
             winMenu.SetActive(true);
             if (PlayerPrefs.GetInt("statusLevel4") == 0)
@@ -230,7 +230,7 @@ public class Level3Manager : MonoBehaviour
         else
         {
             levelFinished = true;
-            services.PostReport(points.ToString(), 4);
+            services.PostReport(points.ToString(), 3);
             loseMenu.SetActive(true);
             time = 0;
         }

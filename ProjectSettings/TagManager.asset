@@ -9,6 +9,9 @@ TagManager:
   - Virus
   - Splat
   - Tommy
+  - Green
+  - Gray
+  - Orange
   layers:
   - Default
   - TransparentFX
