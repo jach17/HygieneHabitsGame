@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] Particulas particulas;
     [SerializeField] TextMeshProUGUI IntentosRestantesTXT;
     [SerializeField] GameObject Winner, Losser, IntentosRes, m_MenuPausa, m_Pausa;
+    [SerializeField] GameObject ServicesGameObject;
+    [SerializeField] TMP_Text txtPointsWin;
+    private Services services;
     void Awake()
     {
         Singleton();
@@ -40,7 +44,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         m_tablero.InicializarTablero();
-
+        services = ServicesGameObject.GetComponent<Services>();
+        string dateStartLevel = DateTime.Now.ToString().Replace("/", "-");
+        PlayerPrefs.SetString("dateStartLevel", dateStartLevel);
+        PlayerPrefs.Save();
 
     }
     void Update()
@@ -104,19 +111,22 @@ public class GameManager : MonoBehaviour
         {
             if (Totaldefichas <= 0)
             {
-                StartCoroutine(MostrarPantalladeVictoria());
+                //StartCoroutine(MostrarPantalladeVictoria());
+                StartCoroutine(CheckInternetWin_Coroutine());
                 m_PuedeSeleccionaFicha = false;
 
             }
             else
             {
-                StartCoroutine(MostrarPantalladeDerrota());
+                //StartCoroutine(MostrarPantalladeDerrota());
+                StartCoroutine(CheckInternetLose_Coroutine());
                 m_PuedeSeleccionaFicha = false;
             }
         }
         if (Totaldefichas <= 0)
         {
-            StartCoroutine(MostrarPantalladeVictoria());
+            //StartCoroutine(MostrarPantalladeVictoria());
+            StartCoroutine(CheckInternetWin_Coroutine());
             m_PuedeSeleccionaFicha = false;
 
         }
@@ -223,5 +233,44 @@ public class GameManager : MonoBehaviour
         m_MenuPausa.SetActive(false);
 
 
+    }
+
+    IEnumerator CheckInternetWin_Coroutine()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        yield return request.SendWebRequest();
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            StartCoroutine(MostrarPantalladeVictoria());
+            services.PostReport(intentos.ToString(), 5);
+            txtPointsWin.text = "Puntuación: " + intentos.ToString();
+
+        }
+    }
+
+    IEnumerator CheckInternetLose_Coroutine()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        yield return request.SendWebRequest();
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            StartCoroutine(MostrarPantalladeDerrota());
+            services.PostReport(intentos.ToString(), 5);
+            
+        }
     }
 }

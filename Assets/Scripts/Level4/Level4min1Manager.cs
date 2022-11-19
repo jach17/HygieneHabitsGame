@@ -1,56 +1,52 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
-public class Level2Min2Manager : MonoBehaviour
+public class Level4min1Manager : MonoBehaviour
 {
+    [SerializeField]
+    private TMP_Text txtPoints;
     [SerializeField]
     private TMP_Text txtTime;
     [SerializeField]
-    private TMP_Text txtPuntos;
-    [SerializeField]
     private TMP_Text txtPointsWin;
-    [SerializeField]
-    private float time;
-
 
     [SerializeField]
     private int hazardCount;
     [SerializeField]
-    private float spawnWaitL;
+    private float spawnWait;
     [SerializeField]
-    private float startWaitL;
-    [SerializeField]
-    private float spawnWaitR;
-    [SerializeField]
-    private float startWaitR;
+    private float startWait;
     [SerializeField]
     private Vector3 spawnValues;
     [SerializeField]
     private GameObject[] hazards;
 
-    private float points;
+    private int points;
     [SerializeField]
-    private float maxPoints = 15;
+    private float time;
+    [SerializeField]
+    private float maxPoint = 15;
+
     [SerializeField]
     private AudioSource audioSource;
 
     [SerializeField]
     private GameObject ServicesGameObject;
     Services services;
-    private bool levelFinished;
 
     [SerializeField]
     private GameObject winMenu;
 
     [SerializeField]
     private GameObject loseMenu;
+
+    private bool levelFinished;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,8 +55,7 @@ public class Level2Min2Manager : MonoBehaviour
         PlayerPrefs.SetString("dateStartLevel", dateStartLevel);
         PlayerPrefs.Save();
 
-        StartCoroutine(SpawnWavesLeft());
-        StartCoroutine(SpawnWavesRight());
+        StartCoroutine(SpawnWaves());
     }
 
     // Update is called once per frame
@@ -68,73 +63,60 @@ public class Level2Min2Manager : MonoBehaviour
     {
         if (levelFinished)
         {
+
             return;
         }
-        if (points == maxPoints && !levelFinished)
+        if (points == maxPoint && !levelFinished)
         {
             StopAllCoroutines();
             StartCoroutine(CheckInternetWin_Coroutine());
             return;
         }
+
         if (time <= 0 && !levelFinished)
         {
             StopAllCoroutines();
             StartCoroutine(CheckInternetLose_Coroutine());
             return;
         }
-        else{
+        else
+        {
             time -= Time.deltaTime;
         }
-        
         txtTime.text = time.ToString("F2");
     }
-
     private void OnApplicationQuit()
     {
         PlayerPrefs.DeleteKey("activeSesion");
         PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
         PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
     }
-    public void AddPunto()
+
+    public void AddPoint()
     {
         points++;
         audioSource.Play();
-        txtPuntos.text = "Puntos: " + points.ToString();
+        txtPoints.text = "Puntos: " + points.ToString();
+    }
+
+    IEnumerator SpawnWaves()
+    {
+        yield return new WaitForSeconds(startWait);
+        while (true)
+        {
+            for (int i = 0; i < hazardCount; i++)
+            {
+                GameObject hazard = hazards[Random.Range(0, hazards.Length)];
+                Vector3 spawnPosition = new Vector3(spawnValues.x, Random.Range(2.86f, -0.69f), spawnValues.z);
+                Instantiate(hazard, spawnPosition, Quaternion.identity);
+                yield return new WaitForSeconds(spawnWait);
+            }
+        }
     }
 
     public void Return()
     {
         SceneManager.LoadScene("ChooseLevelScene");
-    }
-
-    IEnumerator SpawnWavesLeft()
-    {
-        yield return new WaitForSeconds(startWaitL);
-        while (true)
-        {
-            for (int i = 0; i < hazardCount; i++)
-            {
-                GameObject hazard = hazards[Random.Range(0, hazards.Length)];
-                Vector3 spawnPosition = new Vector3(Random.Range(-5.78f,-2.66f),Random.Range(2.44f, -5.19f),0);
-                Instantiate(hazard, spawnPosition, Quaternion.identity);
-                yield return new WaitForSeconds(spawnWaitL);
-            }
-        }
-    }
-
-    IEnumerator SpawnWavesRight()
-    {
-        yield return new WaitForSeconds(startWaitR);
-        while (true)
-        {
-            for (int i = 0; i < hazardCount; i++)
-            {
-                GameObject hazard = hazards[Random.Range(0, hazards.Length)];
-                Vector3 spawnPosition = new Vector3(Random.Range(1.67f, 6.24f), Random.Range(2.94f, -4.54f), 0);
-                Instantiate(hazard, spawnPosition, Quaternion.identity);
-                yield return new WaitForSeconds(spawnWaitR);
-            }
-        }
     }
 
     IEnumerator CheckInternetWin_Coroutine()
@@ -151,16 +133,19 @@ public class Level2Min2Manager : MonoBehaviour
         else
         {
             levelFinished = true;
-            services.PostReport(points.ToString(), 2);
-            txtPointsWin.text = points.ToString();
+
+            services.PostReport(points.ToString(), 4);
+            txtPointsWin.text = "Puntuación: " + points.ToString();
             winMenu.SetActive(true);
-            if (PlayerPrefs.GetInt("statusLevel3") == 0)
+
+            if (PlayerPrefs.GetInt("statusLevel5") == 0)
             {
-                PlayerPrefs.SetInt("statusLevel3", 1);
-                services.UpdateLevelStatus("3");
+                PlayerPrefs.SetInt("statusLevel5", 1);
+                services.UpdateLevelStatus("5");
             }
         }
     }
+
     IEnumerator CheckInternetLose_Coroutine()
     {
         UnityWebRequest request = new UnityWebRequest("http://google.com");
@@ -174,11 +159,11 @@ public class Level2Min2Manager : MonoBehaviour
         }
         else
         {
-            levelFinished = true;
-            services.PostReport(points.ToString(), 2);
-            loseMenu.SetActive(true);
             time = 0;
+            levelFinished = true;
 
+            services.PostReport(points.ToString(), 4);
+            loseMenu.SetActive(true);
         }
     }
 }
