@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class ObjetoTemporal : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private GameObject objeto;
+    [SerializeField]
+    private float tiempodevida;
+    private void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Destroy(objeto, tiempodevida);
     }
 }
