@@ -54,11 +54,12 @@ public class Level2Min2Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 0f;
         services = ServicesGameObject.GetComponent<Services>();
         string dateStartLevel = DateTime.Now.ToString().Replace("/", "-");
         PlayerPrefs.SetString("dateStartLevel", dateStartLevel);
         PlayerPrefs.Save();
-
+        Time.timeScale = 0f;
         StartCoroutine(SpawnWavesLeft());
         StartCoroutine(SpawnWavesRight());
     }
@@ -70,16 +71,29 @@ public class Level2Min2Manager : MonoBehaviour
         {
             return;
         }
-        if (points == maxPoints && !levelFinished)
-        {
-            StopAllCoroutines();
-            StartCoroutine(CheckInternetWin_Coroutine());
-            return;
-        }
+        //if (points == maxPoints && !levelFinished)
+        //{
+        //    StopAllCoroutines();
+        //    StartCoroutine(CheckInternetWin_Coroutine());
+        //    return;
+        //}
         if (time <= 0 && !levelFinished)
         {
             StopAllCoroutines();
-            StartCoroutine(CheckInternetLose_Coroutine());
+            //StartCoroutine(CheckInternetLose_Coroutine());
+            if (points >= maxPoints)
+            {
+                txtPointsWin.text = "Puntos: " + points.ToString();
+                Debug.Log("points>=");
+                StartCoroutine(CheckInternetWin_Coroutine());
+                winMenu.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("lose");
+                StartCoroutine(CheckInternetLose_Coroutine());
+                loseMenu.SetActive(true);
+            }
             return;
         }
         else{
@@ -117,7 +131,10 @@ public class Level2Min2Manager : MonoBehaviour
                 GameObject hazard = hazards[Random.Range(0, hazards.Length)];
                 Vector3 spawnPosition = new Vector3(Random.Range(-5.78f,-2.66f),Random.Range(2.44f, -5.19f),0);
                 Instantiate(hazard, spawnPosition, Quaternion.identity);
+                Destroy(hazard, 0.5f);
                 yield return new WaitForSeconds(spawnWaitL);
+                
+
             }
         }
     }
