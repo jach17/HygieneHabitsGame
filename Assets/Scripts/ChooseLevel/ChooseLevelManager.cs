@@ -14,7 +14,7 @@ public class ChooseLevelManager : MonoBehaviour
 {
     private void Start()
     {
-        
+
     }
 
     [SerializeField] private GameObject m_MenuPausa, m_Pausa;
@@ -46,7 +46,7 @@ public class ChooseLevelManager : MonoBehaviour
             //SceneManager.LoadScene("LoadingScene");
             StartCoroutine(CheckInternet_Coroutine("Level2"));
         }
-        
+
     }
     public void DetenerTiempo()
     {
@@ -64,7 +64,17 @@ public class ChooseLevelManager : MonoBehaviour
             //SceneManager.LoadScene("LoadingScene");
             StartCoroutine(CheckInternet_Coroutine("Level3"));
         }
-        
+
+    }
+    public void PlayLeve31()
+    {
+        //LevelDirection.Level = "Level3";
+        //SceneManager.LoadScene("LoadingScene");
+        if (PlayerPrefs.GetInt("statusLevel3") == 1)
+        {
+            StartCoroutine(CheckInternet_Coroutine("Level31"));
+        }
+
     }
     public void PlayLeve2Prueba()
     {
