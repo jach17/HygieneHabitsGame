@@ -61,7 +61,7 @@ public class Level1Minigame : MonoBehaviour
         string dateStartLevel = DateTime.Now.ToString().Replace("/", "-");
         PlayerPrefs.SetString("dateStartLevel", dateStartLevel);
         PlayerPrefs.Save();
-
+        Time.timeScale = 0f;
         StartCoroutine(SpawnWaves());
         
     }
@@ -85,6 +85,14 @@ public class Level1Minigame : MonoBehaviour
         {
             StopAllCoroutines();
             StartCoroutine(CheckInternetLose_Coroutine());
+            if (points>= maxPoint)
+            {
+                winMenu.SetActive(true);
+            }
+            else
+            {
+                loseMenu.SetActive(true);
+            }
             return;
         }
         else
