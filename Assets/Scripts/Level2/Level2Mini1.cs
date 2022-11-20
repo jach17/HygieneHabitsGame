@@ -58,7 +58,7 @@ public class Level2Mini1 : MonoBehaviour
         string dateStartLevel = DateTime.Now.ToString().Replace("/", "-");
         PlayerPrefs.SetString("dateStartLevel", dateStartLevel);
         PlayerPrefs.Save();
-
+        Time.timeScale = 0f;
         StartCoroutine(SpawnWavesUp());
         StartCoroutine(SpawnWavesDown());
     }
@@ -70,17 +70,31 @@ public class Level2Mini1 : MonoBehaviour
         {
             return;
         }
-        if (points == maxPoints && !levelFinished)
-        {
-            StopAllCoroutines();
-            StartCoroutine(CheckInternetWin_Coroutine());
-            return;
-        }
+        //if (points == maxPoints && !levelFinished)
+        //{
+        //    StopAllCoroutines();
+        //    StartCoroutine(CheckInternetWin_Coroutine());
+        //    return;
+        //}
 
         if (time <= 0 && !levelFinished)
         {
             StopAllCoroutines();
-            StartCoroutine(CheckInternetLose_Coroutine());
+
+            //StartCoroutine(CheckInternetLose_Coroutine());
+            if (points >= maxPoints)
+            {
+               txtPointsWin.text = "Puntos: " + points.ToString();
+                Debug.Log("points>=");
+                StartCoroutine(CheckInternetWin_Coroutine());
+                winMenu.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("lose");
+                StartCoroutine(CheckInternetLose_Coroutine());
+                loseMenu.SetActive(true);
+            }
             return;
         }
         else
@@ -116,6 +130,8 @@ public class Level2Mini1 : MonoBehaviour
                 GameObject hazard = hazards[Random.Range(0, hazards.Length)];
                 Vector3 spawnPosition = new Vector3(Random.Range(-3.29f, 3.5f), Random.Range(2.87f, 1.07f), 0);
                 Instantiate(hazard, spawnPosition, Quaternion.identity);
+                
+                Destroy(hazard, 1f);
                 yield return new WaitForSeconds(spawnWaitUp);
             }
         }
@@ -131,6 +147,7 @@ public class Level2Mini1 : MonoBehaviour
                 GameObject hazard = hazards[Random.Range(0, hazards.Length)];
                 Vector3 spawnPosition = new Vector3(Random.Range(-4.78f, 3.86f), Random.Range(-2.44f, -3.84f), 0);
                 Instantiate(hazard, spawnPosition, Quaternion.identity);
+                Destroy(hazard, 1f);
                 yield return new WaitForSeconds(spawnWaitDown);
             }
         }
