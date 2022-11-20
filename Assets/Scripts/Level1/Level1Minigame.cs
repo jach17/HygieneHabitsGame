@@ -74,23 +74,27 @@ public class Level1Minigame : MonoBehaviour
             
             return;
         }
-        if (points == maxPoint && !levelFinished)
+        /*if (points == maxPoint && !levelFinished)
         {
             StopAllCoroutines();
             StartCoroutine(CheckInternetWin_Coroutine());
             return;
-        }
+        }*/
 
         if (time <= 0 && !levelFinished)
         {
             StopAllCoroutines();
-            StartCoroutine(CheckInternetLose_Coroutine());
+            levelFinished = true;
             if (points>= maxPoint)
             {
+                Debug.Log("points>=");
+                StartCoroutine(CheckInternetWin_Coroutine());
                 winMenu.SetActive(true);
             }
             else
             {
+                Debug.Log("lose");
+                StartCoroutine(CheckInternetLose_Coroutine());
                 loseMenu.SetActive(true);
             }
             return;
