@@ -63,6 +63,7 @@ public class Level3Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 0f;
         services = ServicesGameObject.GetComponent<Services>();
         string dateStartLevel = DateTime.Now.ToString().Replace("/", "-");
         PlayerPrefs.SetString("dateStartLevel", dateStartLevel);
@@ -80,16 +81,47 @@ public class Level3Manager : MonoBehaviour
             return;
         }
         MoveRandom = false;
-        if (points == maxPoints && !levelFinished)
+        /*if (points == maxPoints && !levelFinished)
         {
             StopAllCoroutines();
             StartCoroutine(CheckInternetWin_Coroutine());
             return;
-        }
+        }*/
+        /*if (time <= 0 && !levelFinished)
+        {
+            StopAllCoroutines();
+            levelFinished = true;
+            if (points >= maxPoint)
+            {
+                Debug.Log("points>=");
+                StartCoroutine(CheckInternetWin_Coroutine());
+                winMenu.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("lose");
+                StartCoroutine(CheckInternetLose_Coroutine());
+                loseMenu.SetActive(true);
+            }
+            return;
+        }*/
         if (time <= 0 && !levelFinished)
         {
             StopAllCoroutines();
-            StartCoroutine(CheckInternetLose_Coroutine());
+            levelFinished = true;
+
+            if (points >= maxPoints)
+            {
+                StartCoroutine(CheckInternetWin_Coroutine());
+                winMenu.SetActive(true);
+            }
+            else
+            {
+                StartCoroutine(CheckInternetLose_Coroutine());
+                loseMenu.SetActive(true);
+            }
+           
+            //StartCoroutine(CheckInternetLose_Coroutine());
             return;
         }
         else
@@ -149,10 +181,10 @@ public class Level3Manager : MonoBehaviour
         audioSource.Play();
         txtPuntos.text = "Puntos: " + points.ToString();
 
-        if (points == maxPoints)
+        /*if (points == maxPoints)
         {
             levelFinished = true;
-        }
+        }*/
         if (levelFinished)
         {
             return;
