@@ -32,6 +32,12 @@ public class ChooseLevelManager : MonoBehaviour
         //LevelDirection.Level = "Level1-1";
         StartCoroutine(CheckInternet_Coroutine("Level1-1"));
     }
+    public void PlayLevel1_2()
+    {
+        //LevelDirection.Level = "Level1-1";
+        //StartCoroutine(CheckInternet_Coroutine("Level1-2"));
+        SceneManager.LoadScene("Level1-2");
+    }
     public void PlayLeve2()
     {
         if (PlayerPrefs.GetInt("statusLevel2") == 1)
@@ -42,7 +48,14 @@ public class ChooseLevelManager : MonoBehaviour
         }
         
     }
-
+    public void DetenerTiempo()
+    {
+        Time.timeScale = 0f;
+    }
+    public void ActivarTiempo()
+    {
+        Time.timeScale = 1f;
+    }
     public void PlayLeve3()
     {
         if (PlayerPrefs.GetInt("statusLevel3") == 1)
