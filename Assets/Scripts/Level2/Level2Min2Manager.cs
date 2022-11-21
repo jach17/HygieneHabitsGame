@@ -77,16 +77,18 @@ public class Level2Min2Manager : MonoBehaviour
         //    StartCoroutine(CheckInternetWin_Coroutine());
         //    return;
         //}
-        if (time <= 0 && !levelFinished)
+        if (time <= 0 )
         {
+            levelFinished = true;
             StopAllCoroutines();
             //StartCoroutine(CheckInternetLose_Coroutine());
             if (points >= maxPoints)
             {
-                txtPointsWin.text = "Puntos: " + points.ToString();
+               
                 Debug.Log("points>=");
                 StartCoroutine(CheckInternetWin_Coroutine());
                 winMenu.SetActive(true);
+                txtPointsWin.text = points.ToString();
             }
             else
             {
@@ -131,7 +133,7 @@ public class Level2Min2Manager : MonoBehaviour
                 GameObject hazard = hazards[Random.Range(0, hazards.Length)];
                 Vector3 spawnPosition = new Vector3(Random.Range(-5.78f,-2.66f),Random.Range(2.44f, -5.19f),0);
                 Instantiate(hazard, spawnPosition, Quaternion.identity);
-                Destroy(hazard, 0.5f);
+                
                 yield return new WaitForSeconds(spawnWaitL);
                 
 
