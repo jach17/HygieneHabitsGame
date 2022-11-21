@@ -4556,9 +4556,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Nuestra habitacion es uno de los sitios en el que pasamos la mayor parte
-    del tiempo. Por eso, es importante mantenerlo limpio para evitar la acumulaci\xF3n
-    de polvo, germenes y malos olores y asi evitar enfermedaeds."
+  m_text: "Nuestra habitaci\xF3n es uno de los sitios en el que pasamos la mayor
+    parte del tiempo. Por eso, es importante mantenerlo limpio para evitar la acumulaci\xF3n
+    de polvo, germenes y malos olores y asi prevenir enfermedaeds."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
