@@ -51,6 +51,12 @@ public class ChooseLevelManager : MonoBehaviour
         //StartCoroutine(CheckInternet_Coroutine("Level2-2"));
         SceneManager.LoadScene("Level2-2");
     }
+    public void PlayLevel2_3()
+    {
+        //LevelDirection.Level = "Level1-1";
+        //StartCoroutine(CheckInternet_Coroutine("Level2-2"));
+        SceneManager.LoadScene("Level2-3");
+    }
     public void PlayLeve2()
     {
         if (PlayerPrefs.GetInt("statusLevel2") == 1)
