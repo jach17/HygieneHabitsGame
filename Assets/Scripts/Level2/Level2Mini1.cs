@@ -82,6 +82,7 @@ public class Level2Mini1 : MonoBehaviour
             StopAllCoroutines();
 
             //StartCoroutine(CheckInternetLose_Coroutine());
+
             if (points >= maxPoints)
             {
                txtPointsWin.text = "Puntaje: " + points.ToString();
@@ -168,7 +169,7 @@ public class Level2Mini1 : MonoBehaviour
         {
             levelFinished = true;
             services.PostReport(points.ToString(), 2);
-            txtPointsWin.text = "Puntuación: " + points.ToString();
+            txtPointsWin.text = "PuntuaciÃ³n: " + points.ToString();
             winMenu.SetActive(true);
         }
     }
@@ -196,3 +197,4 @@ public class Level2Mini1 : MonoBehaviour
         SceneManager.LoadScene("ChooseLevelScene");
     }
 }
+

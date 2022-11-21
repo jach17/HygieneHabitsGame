@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -134,6 +135,7 @@ public class Level2Min2Manager : MonoBehaviour
                 Vector3 spawnPosition = new Vector3(Random.Range(-5.78f,-2.66f),Random.Range(2.44f, -5.19f),0);
                 Instantiate(hazard, spawnPosition, Quaternion.identity);
                 
+
                 yield return new WaitForSeconds(spawnWaitL);
                 
 
