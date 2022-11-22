@@ -2745,7 +2745,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 859558931}
         m_TargetAssemblyTypeName: ChooseLevelManager, Assembly-CSharp
-        m_MethodName: PlayLeve4
+        m_MethodName: PlayLeve4Prueba
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
