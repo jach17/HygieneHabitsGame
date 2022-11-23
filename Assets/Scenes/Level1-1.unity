@@ -1200,7 +1200,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2061399134}
         m_TargetAssemblyTypeName: ChooseLevelManager, Assembly-CSharp
-        m_MethodName: PlayLeve1
+        m_MethodName: PlayLevel11
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1315,7 +1315,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.06
+  orthographic size: 5.0591717
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
