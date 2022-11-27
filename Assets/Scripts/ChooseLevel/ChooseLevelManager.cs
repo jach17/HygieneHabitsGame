@@ -126,18 +126,25 @@ public class ChooseLevelManager : MonoBehaviour
         //SceneManager.LoadScene("LoadingScene");
         StartCoroutine(CheckInternet_Coroutine("Level4"));
     }
+    public void PlayLevel4_1()
+    {
+        //LevelDirection.Level = "Level1-1";
+        //StartCoroutine(CheckInternet_Coroutine("Level2-2"));
+        SceneManager.LoadScene("Level4_1");
+    }
     public void PlayLeve5()
     {
         //LevelDirection.Level = "Level5";
         //SceneManager.LoadScene("LoadingScene");
         StartCoroutine(CheckInternet_Coroutine("Level5"));
     }
-    public void PlayLeve5_2()
+    public void PlayLeve5_1()
     {
         //LevelDirection.Level = "Level5-2";
-        //SceneManager.LoadScene("LoadingScene");
-        StartCoroutine(CheckInternet_Coroutine("Level5-2"));
-    }
+        SceneManager.LoadScene("Level5_1");
+    
+    //StartCoroutine(CheckInternet_Coroutine("Level5-1"));
+}
 
     IEnumerator CheckInternet_Coroutine(string scene)
     {
