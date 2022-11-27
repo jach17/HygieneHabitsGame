@@ -7,7 +7,8 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
-public class Level3Manager : MonoBehaviour
+
+public class Level4Min2 : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text txtTime;
@@ -34,7 +35,7 @@ public class Level3Manager : MonoBehaviour
 
 
     private GameObject currentSoap;
-    private DishController dishController;
+    private ShirtController shirtController;
     private GameObject currentDish;
     private float points;
     private int index = 0;
@@ -70,7 +71,7 @@ public class Level3Manager : MonoBehaviour
         PlayerPrefs.Save();
 
         dishes.Shuffle();
-        StartCoroutine(SpawnFirtsDish());
+        StartCoroutine(SpawnFirtsShirt());
     }
 
     // Update is called once per frame
@@ -120,7 +121,7 @@ public class Level3Manager : MonoBehaviour
                 StartCoroutine(CheckInternetLose_Coroutine());
                 loseMenu.SetActive(true);
             }
-           
+
             //StartCoroutine(CheckInternetLose_Coroutine());
             return;
         }
@@ -138,13 +139,13 @@ public class Level3Manager : MonoBehaviour
         //DishController dishController = dishes[index].GetComponent<DishController>();
 
         //Debug.Log(dishController.CanDelete);
-        if (dishController == null)
+        if (shirtController == null)
         {
             return;
         }
-        if (dishController.CanDelete)
+        if (shirtController.CanDelete)
         {
-            NextDish();
+            NextShirt();
         }
 
         /*DishController dishController = dishes[index].GetComponent<DishController>();
@@ -170,7 +171,7 @@ public class Level3Manager : MonoBehaviour
         PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
     }
 
-    public void NextDish()
+    public void NextShirt()
     {
         dishesToWash--;
         //Debug.Log("AAAAAAAAAAAAAAAAA");
@@ -189,9 +190,9 @@ public class Level3Manager : MonoBehaviour
         {
             return;
         }
-        index = Random.Range(0, 9);
+        index = Random.Range(0, 6);
         currentDish = Instantiate(dishes[index], spawnValues, Quaternion.identity);
-        dishController = currentDish.GetComponent<DishController>();
+        shirtController = currentDish.GetComponent<ShirtController>();
 
         //moveRandom = true;
         int spawnSoap = Random.Range(0, 2);
@@ -205,12 +206,12 @@ public class Level3Manager : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnFirtsDish()
+    IEnumerator SpawnFirtsShirt()
     {
         yield return new WaitForSeconds(startWait);
-        index = Random.Range(0, 9);
+        index = Random.Range(0, 6);
         currentDish = Instantiate(dishes[index], spawnValues, Quaternion.identity);
-        dishController = currentDish.GetComponent<DishController>();
+        shirtController = currentDish.GetComponent<ShirtController>();
         //moveRandom = true;
         int spawnSoap = Random.Range(0, 2);
         if (spawnSoap == 0)
@@ -237,13 +238,13 @@ public class Level3Manager : MonoBehaviour
         else
         {
             levelFinished = true;
-            services.PostReport(points.ToString(), 3);
+            services.PostReport(points.ToString(), 4);
             txtPointsWin.text = "Puntuación: " + points.ToString();
             winMenu.SetActive(true);
-            if (PlayerPrefs.GetInt("statusLevel4") == 0)
+            if (PlayerPrefs.GetInt("statusLevel5") == 0)
             {
-                PlayerPrefs.SetInt("statusLevel4", 1);
-                services.UpdateLevelStatus("4");
+                PlayerPrefs.SetInt("statusLevel5", 1);
+                services.UpdateLevelStatus("5");
             }
         }
     }
@@ -262,7 +263,7 @@ public class Level3Manager : MonoBehaviour
         else
         {
             levelFinished = true;
-            services.PostReport(points.ToString(), 3);
+            services.PostReport(points.ToString(), 4);
             loseMenu.SetActive(true);
             time = 0;
         }
