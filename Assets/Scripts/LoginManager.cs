@@ -20,7 +20,10 @@ public class LoginManager : MonoBehaviour
     private GameObject registrarseForm;
     [SerializeField]
     private GameObject mainForm;
-
+    [SerializeField]
+    private GameObject loadingGif;
+    [SerializeField]
+    private GameObject loadingGif2;
     /*[SerializeField]
     private InputField txtNombre;
     [SerializeField]
@@ -140,6 +143,7 @@ public class LoginManager : MonoBehaviour
            
         }
         //PostAuth(user, password,false);
+        loadingGif.SetActive(true);
         StartCoroutine(CheckInternetAuth_Coroutine(false));
         
     }
@@ -151,6 +155,7 @@ public class LoginManager : MonoBehaviour
         }*/
 
         //PostPlayer(user, password, edad, idtutor, token);
+        loadingGif2.SetActive(true);
         StartCoroutine(CheckInternetPostPlayer_Coroutine());
     }
 
