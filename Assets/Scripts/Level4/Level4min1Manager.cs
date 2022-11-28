@@ -54,7 +54,7 @@ public class Level4min1Manager : MonoBehaviour
         string dateStartLevel = DateTime.Now.ToString().Replace("/", "-");
         PlayerPrefs.SetString("dateStartLevel", dateStartLevel);
         PlayerPrefs.Save();
-
+        Time.timeScale = 0f;
         StartCoroutine(SpawnWaves());
     }
 
@@ -76,7 +76,19 @@ public class Level4min1Manager : MonoBehaviour
         if (time <= 0 && !levelFinished)
         {
             StopAllCoroutines();
-            StartCoroutine(CheckInternetLose_Coroutine());
+            levelFinished = true;
+            if (points >= maxPoint)
+            {
+                Debug.Log("points>=");
+                StartCoroutine(CheckInternetWin_Coroutine());
+                winMenu.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("lose");
+                StartCoroutine(CheckInternetLose_Coroutine());
+                loseMenu.SetActive(true);
+            }
             return;
         }
         else
