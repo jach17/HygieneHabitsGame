@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -289,7 +289,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 302020922}
         m_TargetAssemblyTypeName: ChooseLevelManager, Assembly-CSharp
-        m_MethodName: PlayLevel3_1
+        m_MethodName: PlayLevel4_2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -596,11 +596,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\nToma el jabon, y arrastralo para limpiar la suciedad de los platos.\nConsigue
-    un minimo de 15 puntos para ganar\n\nConsejo de higiene:\nEs sumamente importante
-    lavar adecuadamente los alimentos, principalmente aquellos que pienses servir
-    crudos. La lechuga, las espinacas, las acelgas y otras hortalizas son las m\xE1s
-    complejas a la hora del lavado ya que su higiene debe realizarse hoja por hoja. "
+  m_text: "\nToma el jabon, y arrastralo para limpiar la suciedad de la ropa.\nConsigue
+    un minimo de 15 puntos para ganar\n\nConsejo de higiene:\nLa pijama la usamos
+    todos los d\xEDas. Lo recomendable ser\xEDa lavarlo cada cuatro d\xEDas, aunque
+    no tenga manchas ni huela mal, ya que ha estado en contacto directo con la piel
+    durante muchas horas."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1261,7 +1261,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.9281986
+  orthographic size: 4.779183
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1941,7 +1941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -338, y: 79}
+  m_AnchoredPosition: {x: -338, y: 93}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1254534578
@@ -1964,9 +1964,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Consejo de higiene:\nSiempre dedica tiempo y atenci\xF3n al lavado de
-    los vegetales y las frutas. \r\n\xA1Es la \xFAnica manera de asegurarnos de que
-    est\xE9n bien limpios antes de ingerirlos!"
+  m_text: "Consejo de higiene:\nLa mejor forma de prevenir este tipo de enfermedades
+    en beb\xE9s, ni\xF1os y adultos, adem\xE1s de tener un buen aseo personal es
+    lavar la ropa con un jab\xF3n que elimine la mugre, sudor y manchas que generan
+    bacterias. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1993,8 +1994,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44
-  m_fontSizeBase: 44
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2683,7 +2684,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 302020922}
         m_TargetAssemblyTypeName: ChooseLevelManager, Assembly-CSharp
-        m_MethodName: PlayLeve3Prueba
+        m_MethodName: PlayLeve4Prueba
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3005,7 +3006,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 302020922}
         m_TargetAssemblyTypeName: ChooseLevelManager, Assembly-CSharp
-        m_MethodName: PlayLevel3_1
+        m_MethodName: PlayLevel4_2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3138,7 +3139,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 302020922}
         m_TargetAssemblyTypeName: ChooseLevelManager, Assembly-CSharp
-        m_MethodName: PlayLeve3Prueba
+        m_MethodName: PlayLeve4Prueba
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3729,10 +3730,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Descuida, puedes volver a intentarlo,\npero recuerda...\nEl cubo de la
-    basura debe estar ubicado en un lugar \r\nalejado de los alimentos y preferentemente
-    tener tapa para evitar la multiplicaci\xF3n de \r\ng\xE9rmenes y su traspaso
-    a la comida.\n"
+  m_text: "Descuida, puedes volver a intentarlo,\npero recuerda...\nPara mantener
+    la higiene y duraci\xF3n del calzado conviene limpiar, cepillar y airear los
+    zapatos con regularidad.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3894,7 +3894,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 302020922}
         m_TargetAssemblyTypeName: ChooseLevelManager, Assembly-CSharp
-        m_MethodName: PlayLeve3Prueba
+        m_MethodName: PlayLeve4Prueba
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4477,7 +4477,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 302020922}
         m_TargetAssemblyTypeName: ChooseLevelManager, Assembly-CSharp
-        m_MethodName: PlayLevel3_1
+        m_MethodName: PlayLevel4_2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
