@@ -130,7 +130,13 @@ public class ChooseLevelManager : MonoBehaviour
     {
         //LevelDirection.Level = "Level1-1";
         //StartCoroutine(CheckInternet_Coroutine("Level2-2"));
-        SceneManager.LoadScene("Level4_1");
+        SceneManager.LoadScene("Level4-1");
+    }
+    public void PlayLevel4_2()
+    {
+        //LevelDirection.Level = "Level1-1";
+        //StartCoroutine(CheckInternet_Coroutine("Level2-2"));
+        SceneManager.LoadScene("Level4-2");
     }
     public void PlayLeve5()
     {

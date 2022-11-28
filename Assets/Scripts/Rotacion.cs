@@ -6,11 +6,11 @@ public class Rotacion : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
-    private float speedRotation = 0.3f;
+    private float speedRotation = 1.5f;
     [SerializeField]
     private float speedPosition = 1.2f;
     [SerializeField]
-    private float distance = 2f;
+    private float distance = 0.2f;
     private Vector3 startPosition;
 
     private void Start()
