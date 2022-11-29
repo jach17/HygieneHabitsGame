@@ -40,7 +40,9 @@ public class Level3Manager : MonoBehaviour
     private int index = 0;
     private bool levelFinished;
     [SerializeField]
-    private float maxPoints = 15;
+    private float maxPoints = 50;
+    [SerializeField]
+    private float minPoints = 15;
 
     [SerializeField]
     private AudioSource audioSource;
@@ -110,7 +112,7 @@ public class Level3Manager : MonoBehaviour
             StopAllCoroutines();
             levelFinished = true;
 
-            if (points >= maxPoints)
+            if (points >= minPoints)
             {
                 StartCoroutine(CheckInternetWin_Coroutine());
                 winMenu.SetActive(true);
@@ -177,9 +179,13 @@ public class Level3Manager : MonoBehaviour
         Destroy(currentDish);
         Destroy(currentSoap);
         index++;
-        points++;
-        audioSource.Play();
-        txtPuntos.text = "Puntos: " + points.ToString();
+        if (points < maxPoints)
+        {
+            points++;
+            audioSource.Play();
+            txtPuntos.text = "Puntos: " + points.ToString();
+        }
+        
 
         /*if (points == maxPoints)
         {

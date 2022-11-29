@@ -38,7 +38,9 @@ public class Level2Min2Manager : MonoBehaviour
 
     private float points;
     [SerializeField]
-    private float maxPoints = 15;
+    private float maxPoints = 50;
+    [SerializeField]
+    private float minPoints = 15;
     [SerializeField]
     private AudioSource audioSource;
 
@@ -83,7 +85,7 @@ public class Level2Min2Manager : MonoBehaviour
             levelFinished = true;
             StopAllCoroutines();
             //StartCoroutine(CheckInternetLose_Coroutine());
-            if (points >= maxPoints)
+            if (points >= minPoints)
             {
                
                 Debug.Log("points>=");
@@ -114,6 +116,10 @@ public class Level2Min2Manager : MonoBehaviour
     }
     public void AddPunto()
     {
+        if (points >= maxPoints)
+        {
+            return;
+        }
         points++;
         audioSource.Play();
         txtPuntos.text = "Puntos: " + points.ToString();
