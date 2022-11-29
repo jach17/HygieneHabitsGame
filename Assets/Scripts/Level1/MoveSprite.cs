@@ -7,9 +7,10 @@ public class MoveSprite : MonoBehaviour
     [SerializeField]
     private float speed = 5;
     
-    private float time =2.2f;
-    
-    private float increaseSpeed = 1.5f;
+    private float time =1.6f;
+
+    [SerializeField]
+    private float increaseSpeed = 1.7f;
     private Rigidbody2D rb;
 
     private bool ban;
@@ -20,7 +21,7 @@ public class MoveSprite : MonoBehaviour
         //Physics2D.gravity = new Vector2(9.8f,0.0f);
         //GetComponent<Rigidbody>().velocity = transform.up * speed;
         rb = GetComponent<Rigidbody2D>();
-        speed = Random.Range(2, 5);
+        speed = Random.Range(2.5f, 5);
     }
 
     // Update is called once per frame

@@ -41,8 +41,9 @@ public class Level4Min2 : MonoBehaviour
     private int index = 0;
     private bool levelFinished;
     [SerializeField]
-    private float maxPoints = 15;
-
+    private float maxPoints = 25;
+    [SerializeField]
+    private float minPoints = 8;
     [SerializeField]
     private AudioSource audioSource;
 
@@ -111,7 +112,7 @@ public class Level4Min2 : MonoBehaviour
             StopAllCoroutines();
             levelFinished = true;
 
-            if (points >= maxPoints)
+            if (points >= minPoints)
             {
                 StartCoroutine(CheckInternetWin_Coroutine());
                 winMenu.SetActive(true);
@@ -177,10 +178,14 @@ public class Level4Min2 : MonoBehaviour
         //Debug.Log("AAAAAAAAAAAAAAAAA");
         Destroy(currentDish);
         Destroy(currentSoap);
-        index++;
-        points++;
-        audioSource.Play();
-        txtPuntos.text = "Puntos: " + points.ToString();
+        if (points < maxPoints)
+        {
+            index++;
+            points++;
+            audioSource.Play();
+            txtPuntos.text = "Puntos: " + points.ToString();
+        }
+        
 
         /*if (points == maxPoints)
         {
