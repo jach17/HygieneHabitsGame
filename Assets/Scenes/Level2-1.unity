@@ -3174,19 +3174,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   txtTime: {fileID: 1183401616}
   txtPuntos: {fileID: 280150458}
-  time: 30
+  time: 45
   hazardCount: 30
   spawnWaitUp: 1.5
   startWaitUp: 2
-  spawnWaitDown: 3.2
-  startWaitDown: 3.1
+  spawnWaitDown: 2
+  startWaitDown: 2.5
   spawnValues: {x: 0, y: 0, z: 0}
   hazards:
   - {fileID: 6410353355132551246, guid: 71f3323adacbb0648a74191fb59b3873, type: 3}
   - {fileID: 5290169021189888848, guid: 959594edf95aba043a36ccbe781e7e69, type: 3}
   - {fileID: 8027432956345388824, guid: 1987b4b5b4d2bc3458e570365be3ef0b, type: 3}
   - {fileID: 6921301129235171407, guid: 2b13cd4b6f0e0614198c2e06c44235fd, type: 3}
-  maxPoints: 15
+  minPoints: 10
+  maxPoints: 30
   audioSource: {fileID: 1678333260}
   ServicesGameObject: {fileID: 255611309}
   winMenu: {fileID: 1517395275}

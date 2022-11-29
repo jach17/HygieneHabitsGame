@@ -31,8 +31,9 @@ public class Level4min1Manager : MonoBehaviour
     [SerializeField]
     private float time;
     [SerializeField]
-    private float maxPoint = 15;
-
+    private float maxPoint = 25;
+    [SerializeField]
+    private float minPoint = 15;
     [SerializeField]
     private AudioSource audioSource;
 
@@ -77,7 +78,7 @@ public class Level4min1Manager : MonoBehaviour
         {
             StopAllCoroutines();
             levelFinished = true;
-            if (points >= maxPoint)
+            if (points >= minPoint)
             {
                 Debug.Log("points>=");
                 StartCoroutine(CheckInternetWin_Coroutine());
@@ -106,6 +107,10 @@ public class Level4min1Manager : MonoBehaviour
 
     public void AddPoint()
     {
+        if (points >= maxPoint)
+        {
+            return;
+        }
         points++;
         audioSource.Play();
         txtPoints.text = "Puntos: " + points.ToString();
