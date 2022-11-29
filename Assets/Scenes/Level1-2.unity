@@ -582,7 +582,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -367, y: 97}
+  m_AnchoredPosition: {x: -367, y: 111.7}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &382120705
@@ -605,7 +605,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Recuerda que...\nUna vez la hayas tendido tu cama, evita poner en ella
+  m_text: "Recuerda que...\nUna vez que hayas tendido tu cama, evita poner en ella
     la ropa del d\xEDa anterior o llenarla de elementos que podr\xEDan estar mejor
     en un escritorio o biblioteca. Esto ayudar\xE1 a mantener la higiene y a que
     tu habitaci\xF3n no termine siendo el lugar al que llega todo lo que no pusiste
@@ -4418,11 +4418,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Encuentra todos los pares antes de que se acaben las opotunidades \xA1Adelante!\n\nTip
-    de higiene:\nSi vas a utilizar desinfectante para manos, aseg\xFArate de que
+  m_text: "Encuentra todos los pares antes de que se acaben las oportunidades \xA1Adelante!\r\n\r\nConsejo
+    de higiene:\r\nSi vas a utilizar desinfectante para manos, aseg\xFArate de que
     contenga al menos un 60% de alcohol. Debes cubrirte las manos completamente con
     el producto y frot\xE1rtelas una con otra durante 20 a 30 segundos, hasta que
-    las sientas secas. "
+    las sientas secas.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

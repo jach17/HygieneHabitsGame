@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -948,7 +948,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.271661
+  orthographic size: 6.184825
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3070,9 +3070,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Tip de higiene:\nCep\xEDllese suavemente los diferentes lados de los dientes
-    con un cepillo de cerdas suaves y una pasta dental con fl\xFAor. Reemplace el
-    cepillo de dientes cada tres a cuatro meses."
+  m_text: "Consejo de higiene:\nCep\xEDllese suavemente los diferentes lados de los
+    dientes con un cepillo de cerdas suaves y una pasta dental con fl\xFAor. Reemplace
+    el cepillo de dientes cada tres a cuatro meses."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4361,12 +4361,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Consigue un minimo de 15 puntos para ganar\n\nConsejo de higiene:\nM\xF3jate
+  m_text: "Consigue un m\xEDnimo de 15 puntos para ganar\r\n\r\nConsejo de higiene:\r\nM\xF3jate
     las manos con agua limpia y aplica bien el jab\xF3n para hacer espuma.\r\nFr\xF3tate
     las manos vigorosamente durante al menos 20 segundos. Recuerda frotar todas las
     superficies, incluso el dorso de las manos, las mu\xF1ecas, los espacios entre
     los dedos y debajo de las u\xF1as.\r\nEnju\xE1gate bien y s\xE9cate con una toalla
-    limpia o s\xE9calas al aire."
+    limpia o s\xE9calas al aire.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

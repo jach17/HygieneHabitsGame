@@ -431,9 +431,9 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.3
-  m_Range: 100
-  m_SpotAngle: 100
+  m_Intensity: 2
+  m_Range: 110
+  m_SpotAngle: 111
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
@@ -470,7 +470,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -488,14 +488,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 110909336}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 19.46, z: 0}
+  m_LocalRotation: {x: 0.61256427, y: -0, z: -0, w: 0.79042083}
+  m_LocalPosition: {x: 0, y: 15.02, z: -5.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 40
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 75.55, y: 0, z: 0}
 --- !u!1 &118530978
 GameObject:
   m_ObjectHideFlags: 0
@@ -2709,7 +2709,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.7
+  m_Intensity: 0.3
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3036,7 +3036,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: " A menudo quedan restos de productos en las tapaderas que pueden ser objeto
+  m_text: "A menudo quedan restos de productos en las tapaderas que pueden ser objeto
     de contaminaci\xF3n por parte de hongos y bacterias. Para evitarlos, se deben
     retirar los residuos tras finalizar su uso."
   m_isRightToLeft: 0
@@ -5477,10 +5477,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Es muy importante ser cuidadosos con la higiene en el ba\xF1o, ya que
-    aqui se llevan a cabo actividades como la ducha, el lavado de dientes, y otras
-    necesidades fisiol\xF3gicas,. Tambien es la zona de la casa donde se concentra
+    aqu\xED se llevan a cabo actividades como la ducha, el lavado de dientes, y otras
+    necesidades fisiol\xF3gicas. Tambi\xE9n es la zona de la casa donde se concentra
     el mayor n\xFAmero de puntos de agua, por lo que es el lugar m\xE1s propenso
-    a las humedades. "
+    a las humedades."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
