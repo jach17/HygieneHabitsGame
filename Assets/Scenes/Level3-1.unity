@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1261,7 +1261,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.779183
+  orthographic size: 4.5544906
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2295,8 +2295,8 @@ MonoBehaviour:
   txtTime: {fileID: 1788581796}
   txtPuntos: {fileID: 1250170631}
   txtPointsWin: {fileID: 473132168}
-  time: 30
-  startWait: 1.5
+  time: 45
+  startWait: 1
   hazardCount: 0
   spawnValues: {x: -0.03, y: -0.36, z: 0}
   dishes:
@@ -2312,7 +2312,8 @@ MonoBehaviour:
   - {fileID: 7706306777523497029, guid: fbfeef1dd3d1bf1469a5a73b0d4bf854, type: 3}
   dishesToWash: 30
   soap: {fileID: 7864608619482119126, guid: b5601969d6e950d40863ef331dd458a6, type: 3}
-  maxPoints: 15
+  maxPoints: 30
+  minPoints: 10
   audioSource: {fileID: 1581289941}
   ServicesGameObject: {fileID: 1488826127}
   winMenu: {fileID: 327274171}

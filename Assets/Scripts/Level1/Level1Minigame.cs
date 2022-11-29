@@ -38,8 +38,9 @@ public class Level1Minigame : MonoBehaviour
     [SerializeField]
     private float time;
     [SerializeField]
-    private float maxPoint = 15;
-
+    private float maxPoints = 50;
+    [SerializeField]
+    private float minPoints = 15;
     [SerializeField]
     private AudioSource audioSource;
 
@@ -85,7 +86,7 @@ public class Level1Minigame : MonoBehaviour
         {
             StopAllCoroutines();
             levelFinished = true;
-            if (points>= maxPoint)
+            if (points>= minPoints)
             {
                 Debug.Log("points>=");
                 StartCoroutine(CheckInternetWin_Coroutine());
@@ -115,6 +116,10 @@ public class Level1Minigame : MonoBehaviour
 
     public void AddPoint()
     {
+        if (points >= maxPoints)
+        {
+            return;
+        }
         points++;
         audioSource.Play();
         txtPoints.text = "Puntos: " + points.ToString();

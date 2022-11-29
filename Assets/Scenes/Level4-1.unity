@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2555,7 +2555,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.0603113
+  orthographic size: 4.4005527
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -8234,8 +8234,9 @@ MonoBehaviour:
   - {fileID: 5819982669451247245, guid: 68f16addc6f4cc04c9b6c0e5e161e18c, type: 3}
   - {fileID: 3550142407185673914, guid: ed3d2cf7ada13014987a6199e3a5db1d, type: 3}
   - {fileID: 5224600424171892957, guid: 2b37be929350eb547846e900c00d309a, type: 3}
-  time: 30
-  maxPoint: 15
+  time: 50
+  maxPoint: 30
+  minPoint: 10
   audioSource: {fileID: 2061884321}
   ServicesGameObject: {fileID: 163219807}
   winMenu: {fileID: 1876339671}
