@@ -605,7 +605,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Recuerda que...\nEs importante limpiar los botes de gel , champ\xFA, pasta
+  m_text: "Recuerda que...\nEs importante limpiar los botes de gel, champ\xFA, pasta
     de dientes y cremas. A menudo quedan restos de estos productos en las tapaderas,
     estos restos pueden ser objeto de contaminaci\xF3n por parte de hongos y bacterias.
     Para evitarlos, se deben retirar los residuos tras finalizar su uso."
@@ -4417,10 +4417,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Encuentra todos los pares antes de que se acaben las opotunidades \xA1Adelante!\n\nConsejo
-    de higiene:\nEl principal inquilino no deseado de los ba\xF1os son los hongos,
-    algunos de ellos bastante perjudiciales para la salud.\nPara evitar el desarrollo
-    de estos es necesario mantener un alto grado de limpieza y desinfecci\xF3n."
+  m_text: "Encuentra todos los pares antes de que se acaben las oportunidades \xA1Adelante!\r\n\r\nConsejo
+    de higiene:\r\nEl principal inquilino no deseado de los ba\xF1os son los hongos,
+    algunos de ellos bastante perjudiciales para la salud.\r\nPara evitar el desarrollo
+    de estos es necesario mantener un alto grado de limpieza y desinfecci\xF3n.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
