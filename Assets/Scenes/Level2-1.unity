@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -181,11 +181,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\xA1Es hora de lavarse los dientes!\nConsigue un minimo de 15 puntos para
-    ganar\n\nConsejo de higiene:\nCepillese con peque\xF1os movimientos circulares
-    y cortos hacia adelante y hacia atr\xE1s.\r\nCep\xEDllese ligeramente la lengua
-    o use un raspador de lengua para ayudar a mantener la boca limpia.\r\nL\xEDmpiese
-    entre los dientes con hilo dental y enju\xE1guese la boca al finalizar."
+  m_text: "\xA1Es hora de lavarse los dientes!\r\nConsigue un m\xEDnimo de 15 puntos
+    para ganar\r\n\r\nConsejo de higiene:\r\nCep\xEDllese con peque\xF1os movimientos
+    circulares y cortos hacia adelante y hacia atr\xE1s.\r\nCep\xEDllese ligeramente
+    la lengua o use un raspador de lengua para ayudar a mantener la boca limpia.\r\nL\xEDmpiese
+    entre los dientes con hilo dental y enju\xE1guese la boca al finalizar.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2853,9 +2853,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Tip de higiene:\nCep\xEDllese suavemente los diferentes lados de los dientes
-    con un cepillo de cerdas suaves y una pasta dental con fl\xFAor. Reemplace el
-    cepillo de dientes cada tres a cuatro meses."
+  m_text: "Consejo de higiene:\nCep\xEDllese suavemente los diferentes lados de los
+    dientes con un cepillo de cerdas suaves y una pasta dental con fl\xFAor. Reemplace
+    el cepillo de dientes cada tres a cuatro meses."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4562,13 +4562,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Descuida, puedes volver a intentarlo,
-
-    pero recuerda...
-
-    Lavarte
-    los dientes siempre despues de comer, te ayuda a prevenir enfermedades y lesiones
-    como las caries.'
+  m_text: "Descuida, puedes volver a intentarlo,\r\npero recuerda...\r\nLavarte los
+    dientes siempre despu\xE9s de comer, te ayuda a prevenir enfermedades y lesiones
+    como las caries.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

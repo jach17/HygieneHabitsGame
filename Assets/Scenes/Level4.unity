@@ -918,9 +918,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Cuid\xE1 los espacios verdes. Utiliz\xE1 los cestos ubicados en toda su
-    extensi\xF3n para tirar los residuos ocasionales. Los espacios verdes de la Ciudad,
-    significan un pulm\xF3n important\xEDsimo para depurar el aire de smog y poluci\xF3n."
+  m_text: "Cuida los espacios verdes. Utiliza los cestos ubicados en toda su extensi\xF3n
+    para tirar los residuos ocasionales. Los espacios verdes de la Ciudad, significan
+    un pulm\xF3n important\xEDsimo para depurar el aire de smog y poluci\xF3n."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
