@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1315,7 +1315,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.313177
+  orthographic size: 5.0603113
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2748,9 +2748,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Tip de higiene:\nUna precauci\xF3n importante para disminuir el riesgo
-    de infecci\xF3n es limpiar y desinfectar con regularidad las superficies de tu
-    hogar que se tocan frecuentemente."
+  m_text: "Consejo de higiene:\r\nUna precauci\xF3n importante para disminuir el
+    riesgo de infecci\xF3n es limpiar y desinfectar con regularidad las superficies
+    de tu hogar que se tocan frecuentemente.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5272,7 +5272,8 @@ MonoBehaviour:
   - {fileID: 1698705101949698694, guid: 50a38d1aebf044542bf32e2db1d509d2, type: 3}
   - {fileID: 7376691626401730169, guid: d0cef19ea387c054c842c21bc36922fb, type: 3}
   time: 50
-  maxPoint: 12
+  maxPoints: 50
+  minPoints: 15
   audioSource: {fileID: 2061884321}
   ServicesGameObject: {fileID: 163219807}
   winMenu: {fileID: 994089587}
@@ -5349,11 +5350,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Para limpiar la habitacion, debes poner la ropa sucia y la basura en su
-    lugar.\nConsigue un minimo de 15 puntos para ganar\n\nConsejo de higiene:\nAntes
-    de salir de tu habitacion, recuerda poner siempre la ropa sucia en el cesto y
-    poner la basura en su lugar, eso ayudara a mantener la habitacion limpia, \xA1ojo!,
-    si hay trastes sucios no olvides llevarlos contigo.\n"
+  m_text: "Para limpiar la habitaci\xF3n, debes poner la ropa sucia y la basura en
+    su lugar.\r\nConsigue un m\xEDnimo de 15 puntos para ganar\r\n\r\nConsejo de
+    higiene:\r\nAntes de salir de tu habitaci\xF3n, recuerda poner siempre la ropa
+    sucia en el cesto y poner la basura en su lugar, eso ayudara a mantener la habitaci\xF3n
+    limpia, \xA1ojo!, si hay trastes sucios no olvides llevarlos contigo.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
