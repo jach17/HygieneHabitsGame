@@ -70,6 +70,7 @@ public class Level4min1Manager : MonoBehaviour
         if (points == maxPoint && !levelFinished)
         {
             StopAllCoroutines();
+            levelFinished = true;
             StartCoroutine(CheckInternetWin_Coroutine());
             return;
         }
