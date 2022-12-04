@@ -12,6 +12,8 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class ChooseLevelManager : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject image;
     private void Start()
     {
 
@@ -68,12 +70,20 @@ public class ChooseLevelManager : MonoBehaviour
     }
     public void PlayLeve2()
     {
-        if (PlayerPrefs.GetInt("statusLevel2") == 1)
-        {
-            //LevelDirection.Level = "Level2";
-            //SceneManager.LoadScene("LoadingScene");
-            StartCoroutine(CheckInternet_Coroutine("Level2"));
-        }
+        
+        
+            if (PlayerPrefs.GetInt("statusLevel2") == 0)
+            {
+                image.SetActive(true);
+                StartCoroutine(Esperar());
+                image.SetActive(false);
+            }
+            else
+            {
+                StartCoroutine(CheckInternet_Coroutine("Level2"));
+            }
+           
+        
 
     }
     public void DetenerTiempo()
@@ -86,10 +96,14 @@ public class ChooseLevelManager : MonoBehaviour
     }
     public void PlayLeve3()
     {
-        if (PlayerPrefs.GetInt("statusLevel3") == 1)
+        if (PlayerPrefs.GetInt("statusLevel3")==0)
         {
-            //LevelDirection.Level = "Level3";
-            //SceneManager.LoadScene("LoadingScene");
+            image.SetActive(true);
+            StartCoroutine(Esperar());
+            image.SetActive(false);
+        }
+        else
+        {
             StartCoroutine(CheckInternet_Coroutine("Level3"));
         }
 
@@ -122,9 +136,16 @@ public class ChooseLevelManager : MonoBehaviour
     }
     public void PlayLeve4()
     {
-        //LevelDirection.Level = "Level4";
-        //SceneManager.LoadScene("LoadingScene");
-        StartCoroutine(CheckInternet_Coroutine("Level4"));
+        if (PlayerPrefs.GetInt("statusLevel4")==0)
+        {
+            image.SetActive(true);
+            StartCoroutine(Esperar());
+            image.SetActive(false);
+        }
+        else
+        {
+            StartCoroutine(CheckInternet_Coroutine("Level4"));
+        }
     }
     public void PlayLevel4_1()
     {
@@ -146,9 +167,16 @@ public class ChooseLevelManager : MonoBehaviour
     }
     public void PlayLeve5()
     {
-        //LevelDirection.Level = "Level5";
-        //SceneManager.LoadScene("LoadingScene");
-        StartCoroutine(CheckInternet_Coroutine("Level5"));
+        if (PlayerPrefs.GetInt("statusLevel5")==0)
+        {
+            image.SetActive(true);
+            StartCoroutine(Esperar());
+            image.SetActive(false);
+        }
+        else
+        {
+            StartCoroutine(CheckInternet_Coroutine("Level5"));
+        }
     }
     public void PlayLeve5_1()
     {
@@ -175,6 +203,11 @@ public class ChooseLevelManager : MonoBehaviour
             SceneManager.LoadScene("LoadingScene");
         }
     }
+    IEnumerator Esperar()
+    {
 
+        yield return new WaitForSeconds(3f);
+      
+    }
 }
 
