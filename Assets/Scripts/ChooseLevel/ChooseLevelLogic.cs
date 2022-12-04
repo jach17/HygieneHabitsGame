@@ -14,17 +14,17 @@ public class ChooseLevelLogic : MonoBehaviour
     [SerializeField]
     private GameObject servicesGameObject;
 
-    [SerializeField]
-    private GameObject image1;
+    //[SerializeField]
+    //private GameObject image1;
 
-    [SerializeField]
-    private GameObject image2;
-    [SerializeField]
-    private GameObject image3;
-    [SerializeField]
-    private GameObject image4;
-    [SerializeField]
-    private GameObject image5;
+    //[SerializeField]
+    //private GameObject image2;
+    //[SerializeField]
+    //private GameObject image3;
+    //[SerializeField]
+    //private GameObject image4;
+    //[SerializeField]
+    //private GameObject image5;
 
     private Services services;
     // Start is called before the first frame update
@@ -32,7 +32,7 @@ public class ChooseLevelLogic : MonoBehaviour
     {
         //PlayerPrefs.DeleteKey("dateEnd");
         services = servicesGameObject.GetComponent<Services>();
-        LevelCheck();
+        //LevelCheck();
         if (PlayerPrefs.GetString("activeSesion") == "")
         {
             StartCoroutine(CheckInternetPostSesion_Coroutine());
@@ -85,51 +85,51 @@ public class ChooseLevelLogic : MonoBehaviour
         }
     }
 
-    public void LevelCheck()
-    {
+    //public void LevelCheck()
+    //{
 
-        if (PlayerPrefs.GetInt("statusLevel1") == 0)
-        {
-            image1.SetActive(true);
-        }
-        else
-        {
-            image1.SetActive(false);
-        }
-        if (PlayerPrefs.GetInt("statusLevel2") == 0)
-        {
-            image2.SetActive(true);
-        }
-        else
-        {
-            image2.SetActive(false);
-        }
+    //    if (PlayerPrefs.GetInt("statusLevel1") == 0)
+    //    {
+    //        image1.SetActive(true);
+    //    }
+    //    else
+    //    {
+    //        image1.SetActive(false);
+    //    }
+    //    if (PlayerPrefs.GetInt("statusLevel2") == 0)
+    //    {
+    //        image2.SetActive(true);
+    //    }
+    //    else
+    //    {
+    //        image2.SetActive(false);
+    //    }
 
-        if (PlayerPrefs.GetInt("statusLevel3") == 0)
-        {
-            image3.SetActive(true);
-        }
-        else
-        {
-            image3.SetActive(false);
-        }
+    //    if (PlayerPrefs.GetInt("statusLevel3") == 0)
+    //    {
+    //        image3.SetActive(true);
+    //    }
+    //    else
+    //    {
+    //        image3.SetActive(false);
+    //    }
 
-        if (PlayerPrefs.GetInt("statusLevel4") == 0)
-        {
-            image4.SetActive(true);
-        }
-        else
-        {
-            image4.SetActive(false);
-        }
+    //    if (PlayerPrefs.GetInt("statusLevel4") == 0)
+    //    {
+    //        image4.SetActive(true);
+    //    }
+    //    else
+    //    {
+    //        image4.SetActive(false);
+    //    }
 
-        if (PlayerPrefs.GetInt("statusLevel5") == 0)
-        {
-            image5.SetActive(true);
-        }
-        else
-        {
-            image5.SetActive(false);
-        }
-    }
+    //    if (PlayerPrefs.GetInt("statusLevel5") == 0)
+    //    {
+    //        image5.SetActive(true);
+    //    }
+    //    else
+    //    {
+    //        image5.SetActive(false);
+    //    }
+    //}
 }
