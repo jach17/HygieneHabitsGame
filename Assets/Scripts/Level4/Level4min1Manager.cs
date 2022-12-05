@@ -156,11 +156,11 @@ public class Level4min1Manager : MonoBehaviour
             txtPointsWin.text = "Puntuación: " + points.ToString();
             winMenu.SetActive(true);
 
-            if (PlayerPrefs.GetInt("statusLevel5") == 0)
+            /*if (PlayerPrefs.GetInt("statusLevel5") == 0)
             {
                 PlayerPrefs.SetInt("statusLevel5", 1);
                 services.UpdateLevelStatus("5");
-            }
+            }*/
         }
     }
 
