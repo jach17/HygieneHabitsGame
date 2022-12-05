@@ -76,7 +76,7 @@ public class ChooseLevelManager : MonoBehaviour
             {
                 image.SetActive(true);
                 StartCoroutine(Esperar());
-                image.SetActive(false);
+                //image.SetActive(false);
             }
             else
             {
@@ -100,7 +100,7 @@ public class ChooseLevelManager : MonoBehaviour
         {
             image.SetActive(true);
             StartCoroutine(Esperar());
-            image.SetActive(false);
+            //image.SetActive(false);
         }
         else
         {
@@ -140,7 +140,7 @@ public class ChooseLevelManager : MonoBehaviour
         {
             image.SetActive(true);
             StartCoroutine(Esperar());
-            image.SetActive(false);
+            //image.SetActive(false);
         }
         else
         {
@@ -171,7 +171,7 @@ public class ChooseLevelManager : MonoBehaviour
         {
             image.SetActive(true);
             StartCoroutine(Esperar());
-            image.SetActive(false);
+            //image.SetActive(false);
         }
         else
         {
@@ -207,7 +207,7 @@ public class ChooseLevelManager : MonoBehaviour
     {
 
         yield return new WaitForSeconds(2f);
-      
+        image.SetActive(false);
     }
 }
 
