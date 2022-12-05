@@ -249,7 +249,7 @@ public class GameManager : MonoBehaviour
         else
         {
             StartCoroutine(MostrarPantalladeVictoria());
-            services.PostReport(intentos.ToString(), 5);
+            services.PostReport(intentos.ToString(), 1);
             txtPointsWin.text = "Puntuación: " + intentos.ToString();
 
         }
@@ -269,7 +269,7 @@ public class GameManager : MonoBehaviour
         else
         {
             StartCoroutine(MostrarPantalladeDerrota());
-            services.PostReport(intentos.ToString(), 5);
+            services.PostReport(intentos.ToString(), 1);
             
         }
     }
