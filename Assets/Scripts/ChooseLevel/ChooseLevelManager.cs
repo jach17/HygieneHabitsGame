@@ -175,7 +175,7 @@ public class ChooseLevelManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(CheckInternet_Coroutine("Level5"));
+            StartCoroutine(CheckInternet_Coroutine2("Level5"));
         }
     }
     public void PlayLeve5_1()
@@ -203,10 +203,27 @@ public class ChooseLevelManager : MonoBehaviour
             SceneManager.LoadScene("LoadingScene");
         }
     }
+    IEnumerator CheckInternet_Coroutine2(string scene)
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        yield return request.SendWebRequest();
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene2");
+        }
+        else
+        {
+            LevelDirection.Level = scene;
+            SceneManager.LoadScene("LoadingScene2");
+        }
+    }
     IEnumerator Esperar()
     {
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         image.SetActive(false);
     }
 }
