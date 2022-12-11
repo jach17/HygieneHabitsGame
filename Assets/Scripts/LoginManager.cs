@@ -11,6 +11,8 @@ using System.Text;
 using Newtonsoft.Json.Linq;
 using SimpleJSON;
 using UnityEngine.SceneManagement;
+using System.Net;
+using System.Threading.Tasks;
 
 public class LoginManager : MonoBehaviour
 {
@@ -37,14 +39,17 @@ public class LoginManager : MonoBehaviour
     //JSONNode info;
     private bool formActive,reg;
     private string user, password,edad,token,idtutor;
+    [SerializeField]
+    private GameObject servicesGameObject;
+    private Services services;
     //[SerializeField]
     //private Button btnPlay;
     // Start is called before the first frame update
     //Comment to test git
     void Start()
     {
-      
-
+        services = servicesGameObject.GetComponent<Services>();
+        
     }
 
     // Update is called once per frame
@@ -53,7 +58,16 @@ public class LoginManager : MonoBehaviour
     {
 
     }
+    private void OnApplicationQuit()
+    {
+        if (LevelDirection.Level != null)
+        {
+            PlayerPrefs.DeleteKey("activeSesion");
+            PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
+            PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
+        }
 
+    }
     //Metodo que se ejecuta cuando se pulsa el boton de enviar en el formulario de registro
     public void Send()
     {
@@ -65,12 +79,13 @@ public class LoginManager : MonoBehaviour
     }
 
     //Metodo para obtener la informacion del usuario guardada en el telefono, si ya existe la cuenta se salta la escena de login
-    public void GetAccount()
+    public async void GetAccount()
     {
         user = PlayerPrefs.GetString("namePlayer");
         password = PlayerPrefs.GetString("password");
         //PostAuth(user, password,true);
-        StartCoroutine(CheckInternetAuth_Coroutine(true));
+        //StartCoroutine(CheckInternetAuth_Coroutine(true));
+        await CheckInternetAuth_Async(true);
     }
 
     //Metodo que se llama cuando se deja de escribir en el txt de usuario
@@ -136,7 +151,7 @@ public class LoginManager : MonoBehaviour
         mainForm.SetActive(false);
         formActive = false;
     }
-    public void AuthUser()
+    public async void AuthUser()
     {
         if (user != "" && password != "")
         {
@@ -144,10 +159,11 @@ public class LoginManager : MonoBehaviour
         }
         //PostAuth(user, password,false);
         loadingGif.SetActive(true);
-        StartCoroutine(CheckInternetAuth_Coroutine(false));
+        //StartCoroutine(CheckInternetAuth_Coroutine(false));
+        await CheckInternetAuth_Async(false);
         
     }
-    public void RegistrarUsuario()
+    public async void RegistrarUsuario()
     {
         /*if (user != "" && password != "" && edad != "" && idtutor != "" && token != "")
         {
@@ -156,7 +172,8 @@ public class LoginManager : MonoBehaviour
 
         //PostPlayer(user, password, edad, idtutor, token);
         loadingGif2.SetActive(true);
-        StartCoroutine(CheckInternetPostPlayer_Coroutine());
+        //StartCoroutine(CheckInternetPostPlayer_Coroutine());
+        await CheckInternetPostPlayer_Async();
     }
 
     public void GetUsers() => StartCoroutine(GetUsers_Coroutine());
@@ -195,6 +212,7 @@ public class LoginManager : MonoBehaviour
                 Debug.Log(webRequest.downloadHandler.text);
                 break;
         }
+        webRequest.Dispose();
         if (isRegistred())
         {
             if (!autoLogin)
@@ -203,6 +221,15 @@ public class LoginManager : MonoBehaviour
                 PlayerPrefs.SetString("password", password);
                 PlayerPrefs.SetInt("idPlayer",idPlayer);
                 PlayerPrefs.Save();
+                if (services == null)
+                {
+                    Debug.Log("NULL AAAAAAAAAAAAA");
+                }
+                else
+                {
+                    services.GetUserById();
+                }
+               
             }
             SceneManager.LoadScene("ChooseLevelScene");
         }
@@ -244,7 +271,7 @@ public class LoginManager : MonoBehaviour
                 Debug.Log(webRequest.downloadHandler.text);
                 break;
         }
-
+        webRequest.Dispose();
         if (reg)
         {
             PlayerPrefs.SetString("namePlayer", nombre);
@@ -274,6 +301,7 @@ public class LoginManager : MonoBehaviour
             {
                 Debug.Log(request.downloadHandler.text);
             }
+            request.Dispose();
         }
     }
 
@@ -297,6 +325,7 @@ public class LoginManager : MonoBehaviour
                 Debug.Log("Edad: " + itemsData["message"]["response"][0]["agePlayer"]);
                 Debug.Log("Tutor: " + itemsData["message"]["response"][0]["idTutorOwner"]);
             }
+            request.Dispose();
         }
     }
 
@@ -315,6 +344,7 @@ public class LoginManager : MonoBehaviour
         {
             PostAuth(user, password, autologin);
         }
+        request.Dispose();
     }
 
     IEnumerator CheckInternetPostPlayer_Coroutine()
@@ -332,7 +362,57 @@ public class LoginManager : MonoBehaviour
         {
             PostPlayer(user, password, edad, idtutor, token);
         }
+        request.Dispose();
     }
+
+    async Task CheckInternetAuth_Async(bool autologin)
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        request.SendWebRequest();
+
+        while (!request.isDone)
+        {
+            await Task.Yield();
+        }
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            //PostAuth(user, password, autologin);
+            await PostAuthPlayer_Async(user, password, autologin);
+        }
+        request.Dispose();
+    }
+
+    async Task CheckInternetPostPlayer_Async()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        request.SendWebRequest();
+
+        while (!request.isDone)
+        {
+            await Task.Yield();
+        }
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            //PostPlayer(user, password, edad, idtutor, token);
+            await PostPlayer_Async(user, password,edad, idtutor, token);
+        }
+        request.Dispose();
+    }
+
 
     private bool isRegistred()
     {
@@ -347,6 +427,119 @@ public class LoginManager : MonoBehaviour
         }
     }
 
+
+    async Task PostAuthPlayer_Async(string user, string password, bool autoLogin)
+    {
+        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/auth/player";
+        int idPlayer = 0;
+        AuthUser usr = new AuthUser(user, password);
+        var json = JsonConvert.SerializeObject(usr);
+
+        using UnityWebRequest webRequest = UnityWebRequest.Post(url, "POST");
+        webRequest.SetRequestHeader("Content-Type", "application/json");
+        byte[] rawData = Encoding.UTF8.GetBytes(json);
+        //Debug.Log(json);
+        webRequest.uploadHandler = new UploadHandlerRaw(rawData);
+        webRequest.downloadHandler = new DownloadHandlerBuffer();
+        webRequest.SendWebRequest();
+
+        while (!webRequest.isDone)
+        {
+            await Task.Yield();
+        }
+
+        switch (webRequest.result)
+        {
+            case UnityWebRequest.Result.InProgress:
+                break;
+            case UnityWebRequest.Result.Success:
+                //String response = webRequest.downloadHandler.text;
+                //JObject data = JObject.Parse(response);
+                JSONNode info = JSON.Parse(webRequest.downloadHandler.text);
+                reg = info["message"]["response"][0]["isRegistred"];
+                idPlayer = info["message"]["response"][0]["idPlayer"];
+                Debug.Log(info);
+                break;
+            case UnityWebRequest.Result.ConnectionError:
+                Debug.Log(webRequest.downloadHandler.text);
+                break;
+        }
+        webRequest.Dispose();
+        if (isRegistred())
+        {
+            if (!autoLogin)
+            {
+                
+                PlayerPrefs.SetString("namePlayer", user);
+                PlayerPrefs.SetString("password", password);
+                PlayerPrefs.SetInt("idPlayer", idPlayer);
+                PlayerPrefs.Save();
+                if (services == null)
+                {
+                    Debug.Log("NULL AAAAAAAAAAAAA");
+                }
+                else
+                {
+                    services.GetUserById();
+                }
+            }
+            SceneManager.LoadScene("ChooseLevelScene");
+        }
+        else
+        {
+            Debug.Log("NO ESTA REGISTRADOO!");
+        }
+    }
+
+    async Task PostPlayer_Async(string nombre, string password, string edad, string id, string token)
+    {
+        String url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/add/player";
+        int idTutor = Convert.ToInt32(id);
+        int idPlayer = 0;
+        Player player = new Player(nombre, password, edad, idTutor, token);
+        var json = JsonConvert.SerializeObject(player);
+
+        using UnityWebRequest webRequest = UnityWebRequest.Post(url, "POST");
+        webRequest.SetRequestHeader("Content-Type", "application/json");
+        byte[] rawData = Encoding.UTF8.GetBytes(json);
+        Debug.Log(json);
+        webRequest.uploadHandler = new UploadHandlerRaw(rawData);
+        webRequest.downloadHandler = new DownloadHandlerBuffer();
+        webRequest.SendWebRequest();
+
+        while (!webRequest.isDone)
+        {
+            await Task.Yield();
+        }
+
+        switch (webRequest.result)
+        {
+            case UnityWebRequest.Result.InProgress:
+                break;
+            case UnityWebRequest.Result.Success:
+                String response = webRequest.downloadHandler.text;
+                JObject data = JObject.Parse(response);
+                JSONNode info = JSON.Parse(webRequest.downloadHandler.text);
+                reg = info["message"]["response"][0]["inserted"];
+                idPlayer = info["message"]["response"][0]["insertedId"];
+                break;
+            case UnityWebRequest.Result.ConnectionError:
+                Debug.Log(webRequest.downloadHandler.text);
+                break;
+        }
+        webRequest.Dispose();
+        if (reg)
+        {
+            PlayerPrefs.SetString("namePlayer", nombre);
+            PlayerPrefs.SetString("password", password);
+            PlayerPrefs.SetInt("idPlayer", idPlayer);
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            Debug.Log("ERROR AL REGISTRAR USUARIO");
+        }
+    }
 }
 
 [Serializable]

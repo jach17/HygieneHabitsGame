@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -60,7 +61,7 @@ public class Level4min1Manager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    async void Update()
     {
         if (levelFinished)
         {
@@ -71,7 +72,8 @@ public class Level4min1Manager : MonoBehaviour
         {
             StopAllCoroutines();
             levelFinished = true;
-            StartCoroutine(CheckInternetWin_Coroutine());
+            //StartCoroutine(CheckInternetWin_Coroutine());
+            await CheckInternetWin_Async();
             return;
         }
 
@@ -82,13 +84,15 @@ public class Level4min1Manager : MonoBehaviour
             if (points >= minPoint)
             {
                 Debug.Log("points>=");
-                StartCoroutine(CheckInternetWin_Coroutine());
+                //StartCoroutine(CheckInternetWin_Coroutine());
+                await CheckInternetWin_Async();
                 winMenu.SetActive(true);
             }
             else
             {
                 Debug.Log("lose");
-                StartCoroutine(CheckInternetLose_Coroutine());
+                //StartCoroutine(CheckInternetLose_Coroutine());
+                await CheckInternetLose_Async();
                 loseMenu.SetActive(true);
             }
             return;
@@ -99,11 +103,20 @@ public class Level4min1Manager : MonoBehaviour
         }
         txtTime.text = time.ToString("F2");
     }
-    private void OnApplicationQuit()
+    /*private void OnApplicationQuit()
     {
         PlayerPrefs.DeleteKey("activeSesion");
         PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
         PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
+    }*/
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
+            PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
+        }
+
     }
 
     public void AddPoint()
@@ -181,6 +194,65 @@ public class Level4min1Manager : MonoBehaviour
             levelFinished = true;
 
             services.PostReport(points.ToString(), 4);
+            loseMenu.SetActive(true);
+        }
+    }
+
+    async Task CheckInternetWin_Async()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        request.SendWebRequest();
+
+        while (!request.isDone)
+        {
+            await Task.Yield();
+        }
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            levelFinished = true;
+
+            //services.PostReport(points.ToString(), 4);
+            await services.PostReport_Aync(points.ToString(), 4);
+            txtPointsWin.text = "Puntuación: " + points.ToString();
+            winMenu.SetActive(true);
+
+            /*if (PlayerPrefs.GetInt("statusLevel5") == 0)
+            {
+                PlayerPrefs.SetInt("statusLevel5", 1);
+                services.UpdateLevelStatus("5");
+            }*/
+        }
+    }
+
+    async Task CheckInternetLose_Async()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        request.SendWebRequest();
+
+        while (!request.isDone)
+        {
+            await Task.Yield();
+        }
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            time = 0;
+            levelFinished = true;
+            //services.PostReport(points.ToString(), 4);
+            await services.PostReport_Aync(points.ToString(), 4);
             loseMenu.SetActive(true);
         }
     }
