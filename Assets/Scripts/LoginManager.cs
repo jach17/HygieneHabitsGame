@@ -79,12 +79,13 @@ public class LoginManager : MonoBehaviour
     }
 
     //Metodo para obtener la informacion del usuario guardada en el telefono, si ya existe la cuenta se salta la escena de login
-    public void GetAccount()
+    public async void GetAccount()
     {
         user = PlayerPrefs.GetString("namePlayer");
         password = PlayerPrefs.GetString("password");
         //PostAuth(user, password,true);
-        StartCoroutine(CheckInternetAuth_Coroutine(true));
+        //StartCoroutine(CheckInternetAuth_Coroutine(true));
+        await CheckInternetAuth_Async(true);
     }
 
     //Metodo que se llama cuando se deja de escribir en el txt de usuario
@@ -159,10 +160,10 @@ public class LoginManager : MonoBehaviour
         //PostAuth(user, password,false);
         loadingGif.SetActive(true);
         //StartCoroutine(CheckInternetAuth_Coroutine(false));
-        await PostAuthPlayer_Async(user, password, false);
+        await CheckInternetAuth_Async(false);
         
     }
-    public void RegistrarUsuario()
+    public async void RegistrarUsuario()
     {
         /*if (user != "" && password != "" && edad != "" && idtutor != "" && token != "")
         {
@@ -171,7 +172,8 @@ public class LoginManager : MonoBehaviour
 
         //PostPlayer(user, password, edad, idtutor, token);
         loadingGif2.SetActive(true);
-        StartCoroutine(CheckInternetPostPlayer_Coroutine());
+        //StartCoroutine(CheckInternetPostPlayer_Coroutine());
+        await CheckInternetPostPlayer_Async();
     }
 
     public void GetUsers() => StartCoroutine(GetUsers_Coroutine());
@@ -219,7 +221,15 @@ public class LoginManager : MonoBehaviour
                 PlayerPrefs.SetString("password", password);
                 PlayerPrefs.SetInt("idPlayer",idPlayer);
                 PlayerPrefs.Save();
-                services.GetUserById();
+                if (services == null)
+                {
+                    Debug.Log("NULL AAAAAAAAAAAAA");
+                }
+                else
+                {
+                    services.GetUserById();
+                }
+               
             }
             SceneManager.LoadScene("ChooseLevelScene");
         }
@@ -355,6 +365,55 @@ public class LoginManager : MonoBehaviour
         request.Dispose();
     }
 
+    async Task CheckInternetAuth_Async(bool autologin)
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        request.SendWebRequest();
+
+        while (!request.isDone)
+        {
+            await Task.Yield();
+        }
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            //PostAuth(user, password, autologin);
+            await PostAuthPlayer_Async(user, password, autologin);
+        }
+        request.Dispose();
+    }
+
+    async Task CheckInternetPostPlayer_Async()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        request.SendWebRequest();
+
+        while (!request.isDone)
+        {
+            await Task.Yield();
+        }
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            //PostPlayer(user, password, edad, idtutor, token);
+            await PostPlayer_Async(user, password,edad, idtutor, token);
+        }
+        request.Dispose();
+    }
+
+
     private bool isRegistred()
     {
 
@@ -410,11 +469,19 @@ public class LoginManager : MonoBehaviour
         {
             if (!autoLogin)
             {
+                
                 PlayerPrefs.SetString("namePlayer", user);
                 PlayerPrefs.SetString("password", password);
                 PlayerPrefs.SetInt("idPlayer", idPlayer);
                 PlayerPrefs.Save();
-                await services.GetUserById_Async();
+                if (services == null)
+                {
+                    Debug.Log("NULL AAAAAAAAAAAAA");
+                }
+                else
+                {
+                    services.GetUserById();
+                }
             }
             SceneManager.LoadScene("ChooseLevelScene");
         }
