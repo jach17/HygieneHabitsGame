@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -76,7 +77,7 @@ public class Level3Manager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    async void Update()
     {
         if (levelFinished)
         {
@@ -114,12 +115,14 @@ public class Level3Manager : MonoBehaviour
 
             if (points >= minPoints)
             {
-                StartCoroutine(CheckInternetWin_Coroutine());
+                //StartCoroutine(CheckInternetWin_Coroutine());
+                await CheckInternetWin_Async();
                 winMenu.SetActive(true);
             }
             else
             {
-                StartCoroutine(CheckInternetLose_Coroutine());
+                //StartCoroutine(CheckInternetLose_Coroutine());
+                await CheckInternetLose_Async();
                 loseMenu.SetActive(true);
             }
            
@@ -165,11 +168,21 @@ public class Level3Manager : MonoBehaviour
         }*/
     }
 
-    private void OnApplicationQuit()
+    /*private void OnApplicationQuit()
     {
         PlayerPrefs.DeleteKey("activeSesion");
         PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
         PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
+    }*/
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
+            PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
+        }
+
     }
 
     public void NextDish()
@@ -269,6 +282,64 @@ public class Level3Manager : MonoBehaviour
         {
             levelFinished = true;
             services.PostReport(points.ToString(), 3);
+            loseMenu.SetActive(true);
+            time = 0;
+        }
+    }
+
+    async Task CheckInternetWin_Async()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        request.SendWebRequest();
+
+        while (!request.isDone)
+        {
+            await Task.Yield();
+        }
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            levelFinished = true;
+            //services.PostReport(points.ToString(), 3);
+            await services.PostReport_Aync(points.ToString(), 3);
+            txtPointsWin.text = "Puntuación: " + points.ToString();
+            winMenu.SetActive(true);
+            if (PlayerPrefs.GetInt("statusLevel4") == 0)
+            {
+                PlayerPrefs.SetInt("statusLevel4", 1);
+                //services.UpdateLevelStatus("4");
+                await services.UpdateLevelStatus_Async("4");
+            }
+        }
+    }
+
+    async Task CheckInternetLose_Async()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        request.SendWebRequest();
+
+        while (!request.isDone)
+        {
+            await Task.Yield();
+        }
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            levelFinished = true;
+            //services.PostReport(points.ToString(), 3);
+            await services.PostReport_Aync(points.ToString(), 3);
             loseMenu.SetActive(true);
             time = 0;
         }

@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -27,7 +28,7 @@ public class LoadingScene : MonoBehaviour
     private bool reg;
     private bool timeFinished;
     // Start is called before the first frame update
-    void Start()
+    async void Start()
     {
 
         if (LevelDirection.Level == null)
@@ -35,8 +36,8 @@ public class LoadingScene : MonoBehaviour
             services = servicesGameObject.GetComponent<Services>();
 
             //StartCoroutine(Wait());
-            StartCoroutine(CheckInternet_Coroutine());
-
+            //StartCoroutine(CheckInternet_Coroutine());
+            await CheckInternet_Async();
 
         }
         else
@@ -79,6 +80,7 @@ public class LoadingScene : MonoBehaviour
 
         if (request.error != null)
         {
+            request.Dispose();
             Debug.Log("Error de conexion");
             StopAllCoroutines();
             btnTry.gameObject.SetActive(true);
@@ -86,6 +88,7 @@ public class LoadingScene : MonoBehaviour
         }
         else
         {
+            request.Dispose();
             Debug.Log("Conexion");
             StartCoroutine(Wait());
         }
@@ -107,6 +110,49 @@ public class LoadingScene : MonoBehaviour
 
     }
 
+    async Task CheckInternet_Async()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        request.SendWebRequest();
+
+        while (!request.isDone)
+        {
+            await Task.Yield();
+        }
+
+        if (request.error != null)
+        {
+            request.Dispose();
+            Debug.Log("Error de conexion");
+            StopAllCoroutines();
+            btnTry.gameObject.SetActive(true);
+            timeFinished = true;
+        }
+        else
+        {
+            request.Dispose();
+            Debug.Log("Conexion");
+            await Wait2();
+        }
+    }
+
+    async Task Wait2()
+    {
+        await Task.Delay(1000);
+
+        namePlayer = PlayerPrefs.GetString("namePlayer");
+        password = PlayerPrefs.GetString("password");
+        if (namePlayer != "" && password != "")
+        {
+            //services.PostAuth(namePlayer, password);
+            await services.PostAuthPlayer_Async(namePlayer, password);
+        }
+        else
+        {
+            SceneManager.LoadScene("LoginScene");
+        }
+
+    }
     IEnumerator WaitForLevel()
     {
         yield return new WaitForSeconds(1.5f);
