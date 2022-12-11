@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using System.Threading.Tasks;
 
 public class GameManager : MonoBehaviour
 {
@@ -55,14 +56,22 @@ public class GameManager : MonoBehaviour
         IntentosRestantesTXT.text = "Intentos restantes: " + intentos;
     }
 
-    private void OnApplicationQuit()
+    /*private void OnApplicationQuit()
     {
 
         PlayerPrefs.DeleteKey("activeSesion");
         PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
         PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
-    }
+    }*/
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
+            PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
+        }
 
+    }
     //Con este metodo vamos a gestionar la parte logica de el juego
     public void ClickFicha(Card ficha)
     {
@@ -103,7 +112,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void ParCorrecto(Card ficha, Card ultimaFichaSeleccionada)
+    private async void ParCorrecto(Card ficha, Card ultimaFichaSeleccionada)
     {
         Totaldefichas = Totaldefichas - 2;
         intentos = intentos - 1;
@@ -112,21 +121,24 @@ public class GameManager : MonoBehaviour
             if (Totaldefichas <= 0)
             {
                 //StartCoroutine(MostrarPantalladeVictoria());
-                StartCoroutine(CheckInternetWin_Coroutine());
+                //StartCoroutine(CheckInternetWin_Coroutine());
+                await CheckInternetWin_Async();
                 m_PuedeSeleccionaFicha = false;
 
             }
             else
             {
                 //StartCoroutine(MostrarPantalladeDerrota());
-                StartCoroutine(CheckInternetLose_Coroutine());
+                //StartCoroutine(CheckInternetLose_Coroutine());
+                await CheckInternetLose_Async();
                 m_PuedeSeleccionaFicha = false;
             }
         }
         if (Totaldefichas <= 0)
         {
             //StartCoroutine(MostrarPantalladeVictoria());
-            StartCoroutine(CheckInternetWin_Coroutine());
+            //StartCoroutine(CheckInternetWin_Coroutine());
+            await CheckInternetWin_Async();
             m_PuedeSeleccionaFicha = false;
 
         }
@@ -271,6 +283,57 @@ public class GameManager : MonoBehaviour
             StartCoroutine(MostrarPantalladeDerrota());
             services.PostReport(intentos.ToString(), 1);
             
+        }
+    }
+
+    async Task CheckInternetWin_Async()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        request.SendWebRequest();
+
+        while (!request.isDone)
+        {
+            await Task.Yield();
+        }
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            StartCoroutine(MostrarPantalladeVictoria());
+            //services.PostReport(intentos.ToString(), 1);
+            await services.PostReport_Aync(intentos.ToString(), 1);
+            txtPointsWin.text = "Puntuación: " + intentos.ToString();
+
+        }
+    }
+
+    async Task CheckInternetLose_Async()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        request.SendWebRequest();
+
+        while (!request.isDone)
+        {
+            await Task.Yield();
+        }
+
+        if (request.error != null)
+        {
+            Debug.Log("Error de conexion ");
+            LevelDirection.Level = null;
+            SceneManager.LoadScene("LoadingScene");
+        }
+        else
+        {
+            StartCoroutine(MostrarPantalladeDerrota());
+            //services.PostReport(intentos.ToString(), 1);
+            await services.PostReport_Aync(intentos.ToString(), 1);
+
         }
     }
 }

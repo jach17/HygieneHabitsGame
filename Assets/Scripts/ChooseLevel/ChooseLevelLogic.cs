@@ -28,15 +28,25 @@ public class ChooseLevelLogic : MonoBehaviour
 
     private Services services;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        //PlayerPrefs.DeleteKey("dateEnd");
+        
+    }
+    async void Start()
+    {
         services = servicesGameObject.GetComponent<Services>();
         //LevelCheck();
         if (PlayerPrefs.GetString("activeSesion") == "")
         {
-            StartCoroutine(CheckInternetPostSesion_Coroutine());
-
+            Debug.Log("ActiveSesion");
+            //StartCoroutine(CheckInternetPostSesion_Coroutine());
+            await services.PostSesion_Async(DateTime.Now.ToString().Replace("/", "-"), "");
+            //PlayerPrefs.SetString("activeSesion", "true");
+            //PlayerPrefs.Save();
+        }
+        else
+        {
+            Debug.Log("Sesion");
         }
     }
 
@@ -46,13 +56,25 @@ public class ChooseLevelLogic : MonoBehaviour
 
     }
 
-    private void OnApplicationQuit()
+    /*private void OnApplicationQuit()
     {
-        PlayerPrefs.DeleteKey("activeSesion");
-        PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
-        PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
-    }
+            if (LevelDirection.Level != null)
+            {
+                PlayerPrefs.DeleteKey("activeSesion");
+                PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
+                PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
+            Debug.Log("datos guardados sssssssssss");
+            }
+    }*/
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
+            PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
+        }
 
+    }
     public void SignOut()
     {
         PlayerPrefs.DeleteKey("namePlayer");
@@ -65,6 +87,19 @@ public class ChooseLevelLogic : MonoBehaviour
         PlayerPrefs.DeleteKey("statusLevel5");
     }
 
+    IEnumerator PostSesion_Coroutine()
+    {
+        yield return new WaitForSeconds(1);
+        //PlayerPrefs.DeleteKey("dateEnd");
+        services = servicesGameObject.GetComponent<Services>();
+        //LevelCheck();
+        if (PlayerPrefs.GetString("activeSesion") == "")
+        {
+            StartCoroutine(CheckInternetPostSesion_Coroutine());
+
+        }
+    }
+
     IEnumerator CheckInternetPostSesion_Coroutine()
     {
         UnityWebRequest request = new UnityWebRequest("http://google.com");
@@ -72,12 +107,14 @@ public class ChooseLevelLogic : MonoBehaviour
 
         if (request.error != null)
         {
+            request.Dispose();
             Debug.Log("Error de conexion ");
             LevelDirection.Level = null;
             SceneManager.LoadScene("LoadingScene");
         }
         else
         {
+            request.Dispose();
             Debug.Log("postsesion");
             services.PostSesion(DateTime.Now.ToString().Replace("/", "-"), "");
             PlayerPrefs.SetString("activeSesion", "true");
