@@ -245,7 +245,7 @@ public class LoginManager : MonoBehaviour
         String url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/add/player";
         int idTutor = Convert.ToInt32(id);
         int idPlayer = 0;
-        Player player = new Player(nombre,password,edad,idTutor,token);
+        Player player = new Player(nombre,password,edad,/*idTutor,*/token);
         var json = JsonConvert.SerializeObject(player);
 
         using UnityWebRequest webRequest = UnityWebRequest.Post(url, "POST");
@@ -408,7 +408,7 @@ public class LoginManager : MonoBehaviour
         else
         {
             //PostPlayer(user, password, edad, idtutor, token);
-            await PostPlayer_Async(user, password,edad, idtutor, token);
+            await PostPlayer_Async(user, password,edad,/* idtutor,*/ token);
         }
         request.Dispose();
     }
@@ -491,12 +491,12 @@ public class LoginManager : MonoBehaviour
         }
     }
 
-    async Task PostPlayer_Async(string nombre, string password, string edad, string id, string token)
+    async Task PostPlayer_Async(string nombre, string password, string edad, /*string id,*/ string token)
     {
         String url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/add/player";
-        int idTutor = Convert.ToInt32(id);
+        //int idTutor = Convert.ToInt32(id);
         int idPlayer = 0;
-        Player player = new Player(nombre, password, edad, idTutor, token);
+        Player player = new Player(nombre, password, edad, /*idTutor,*/ token);
         var json = JsonConvert.SerializeObject(player);
 
         using UnityWebRequest webRequest = UnityWebRequest.Post(url, "POST");
@@ -565,12 +565,12 @@ public class Player
     public int idTutorOwner;
     public String authTokenTutor;
 
-    public Player(String namePlayer, String passwordPlayer, string agePlayer, int idTutorOwner, string authTokenTutor)
+    public Player(String namePlayer, String passwordPlayer, string agePlayer, /*int idTutorOwner,*/ string authTokenTutor)
     {
         this.namePlayer = namePlayer;
         this.passwordPlayer = passwordPlayer;
         this.agePlayer = agePlayer;
-        this.idTutorOwner = idTutorOwner;
+        //this.idTutorOwner = idTutorOwner;
         this.authTokenTutor = authTokenTutor;
     }
 
