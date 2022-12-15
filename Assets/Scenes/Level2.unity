@@ -403,6 +403,63 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 6.3100634
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &53383748
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5045064772186482548, guid: cb82d7325fa292f4f8aed615db48f450, type: 3}
+      propertyPath: m_Name
+      value: Estrella (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911932033754290164, guid: cb82d7325fa292f4f8aed615db48f450, type: 3}
+      propertyPath: m_RootOrder
+      value: 41
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911932033754290164, guid: cb82d7325fa292f4f8aed615db48f450, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911932033754290164, guid: cb82d7325fa292f4f8aed615db48f450, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911932033754290164, guid: cb82d7325fa292f4f8aed615db48f450, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911932033754290164, guid: cb82d7325fa292f4f8aed615db48f450, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911932033754290164, guid: cb82d7325fa292f4f8aed615db48f450, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911932033754290164, guid: cb82d7325fa292f4f8aed615db48f450, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911932033754290164, guid: cb82d7325fa292f4f8aed615db48f450, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911932033754290164, guid: cb82d7325fa292f4f8aed615db48f450, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911932033754290164, guid: cb82d7325fa292f4f8aed615db48f450, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911932033754290164, guid: cb82d7325fa292f4f8aed615db48f450, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cb82d7325fa292f4f8aed615db48f450, type: 3}
 --- !u!1 &95056623
 GameObject:
   m_ObjectHideFlags: 0
@@ -2861,8 +2918,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3.9699206
-  m_Center: {x: -0, y: 0, z: -0.24971724}
+  m_Radius: 3.3993635
+  m_Center: {x: 0, y: 0, z: 0.32083988}
 --- !u!1 &601159751
 GameObject:
   m_ObjectHideFlags: 0
