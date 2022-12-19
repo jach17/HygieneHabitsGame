@@ -61,6 +61,7 @@ public class Level1Minigame : MonoBehaviour
     {
         services = ServicesGameObject.GetComponent<Services>();
         string dateStartLevel = DateTime.Now.ToString().Replace("/", "-");
+        Debug.Log(dateStartLevel);
         PlayerPrefs.SetString("dateStartLevel", dateStartLevel);
         PlayerPrefs.Save();
         Time.timeScale = 0f;
@@ -120,8 +121,8 @@ public class Level1Minigame : MonoBehaviour
     {
         if (pause)
         {
-            PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
-            PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
+                PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
+                PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
         }
 
     }
