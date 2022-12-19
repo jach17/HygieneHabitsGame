@@ -67,8 +67,10 @@ public class GameManager : MonoBehaviour
     {
         if (pause)
         {
+
             PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
             PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
+
         }
 
     }
@@ -282,7 +284,7 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(MostrarPantalladeDerrota());
             services.PostReport(intentos.ToString(), 1);
-            
+
         }
     }
 

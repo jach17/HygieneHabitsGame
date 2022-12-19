@@ -469,6 +469,8 @@ public class Services : MonoBehaviour
 
         string dateEndLevel = DateTime.Now.ToString().Replace("/", "-");
         Report report = new Report(PlayerPrefs.GetString("dateStartLevel"), dateEndLevel, PlayerPrefs.GetInt("idSesion"), currentScoreLevel, idLevelPlayed);
+        Debug.Log(PlayerPrefs.GetString("dateStartLevel"));
+        Debug.Log(dateEndLevel);
         //Report report = new Report(PlayerPrefs.GetString("dateStartLevel"), dateEndLevel, 89, currentScoreLevel, idLevelPlayed);
         //Report report = new Report("08-12-2022 11:00", "08-12-2022 12:00", 119, "3", 3);
         var json = JsonConvert.SerializeObject(report);
@@ -546,18 +548,20 @@ public class Services : MonoBehaviour
                 break;
         }
         webRequest.Dispose();
-        if (PlayerPrefs.GetString("dateEnd") != "")
+        /*if (PlayerPrefs.GetString("dateEnd") != "")
         {
             await UpdateSesion_Async();
-        }
+        }*/
     }
-    async Task UpdateSesion_Async()
+    public async Task<bool> UpdateSesion_Async()
     {
         Debug.Log("UpdateSesion");
         string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/update/sesion/" + PlayerPrefs.GetInt("oldSesion").ToString();
         Debug.Log("UPDATE SESION AAAAAAAAAA");
         dateEndc date = new dateEndc(PlayerPrefs.GetString("dateEnd"));
         var json = JsonConvert.SerializeObject(date);
+        
+        //string datee = DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year + " " + DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second;
 
         using UnityWebRequest webRequest = UnityWebRequest.Post(url, "UPDATE");
         webRequest.SetRequestHeader("Content-Type", "application/json");
@@ -582,13 +586,16 @@ public class Services : MonoBehaviour
                 JSONNode info = JSON.Parse(webRequest.downloadHandler.text);
                 Debug.Log(info);
                 webRequest.Dispose();
+                PlayerPrefs.DeleteKey("dateEnd");
+                return true;
                 break;
             case UnityWebRequest.Result.ConnectionError:
                 Debug.Log(webRequest.downloadHandler.text);
+                return false;
                 break;
         }
         webRequest.Dispose();
-        PlayerPrefs.DeleteKey("dateEnd");
+        return true;
     }
 
     public async Task UpdateLevelStatus_Async(string level)

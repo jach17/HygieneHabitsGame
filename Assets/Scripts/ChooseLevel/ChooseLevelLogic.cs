@@ -27,10 +27,11 @@ public class ChooseLevelLogic : MonoBehaviour
     //private GameObject image5;
 
     private Services services;
+    private bool ban;
     // Start is called before the first frame update
     private void Awake()
     {
-        
+
     }
     async void Start()
     {
@@ -38,9 +39,28 @@ public class ChooseLevelLogic : MonoBehaviour
         //LevelCheck();
         if (PlayerPrefs.GetString("activeSesion") == "")
         {
-            Debug.Log("ActiveSesion");
+
             //StartCoroutine(CheckInternetPostSesion_Coroutine());
-            await services.PostSesion_Async(DateTime.Now.ToString().Replace("/", "-"), "");
+            if (PlayerPrefs.GetString("dateEnd") != "")
+            {
+                var a = await services.UpdateSesion_Async();
+                if (a)
+                {
+                    await services.PostSesion_Async(DateTime.Now.ToString().Replace("/", "-"), "");
+                    //PlayerPrefs.DeleteKey("sesionError");
+                    ban = true;
+                }
+                /*else
+                {
+                    PlayerPrefs.SetString("sesionError", "active");
+                }*/
+            }
+            if (!ban)
+            {
+                await services.PostSesion_Async(DateTime.Now.ToString().Replace("/", "-"), "");
+            }
+            //await services.PostSesion_Async(DateTime.Now.ToString().Replace("/", "-"), "");
+            //Debug.Log(DateTime.Now.ToString().Replace("/", "-"));
             //PlayerPrefs.SetString("activeSesion", "true");
             //PlayerPrefs.Save();
         }
@@ -70,8 +90,11 @@ public class ChooseLevelLogic : MonoBehaviour
     {
         if (pause)
         {
+
             PlayerPrefs.SetString("dateEnd", DateTime.Now.ToString().Replace("/", "-"));
             PlayerPrefs.SetInt("oldSesion", PlayerPrefs.GetInt("idSesion"));
+
+
         }
 
     }
