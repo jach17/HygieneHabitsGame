@@ -11,7 +11,7 @@ public class GetPruebas : MonoBehaviour
     void Start()
     {
         services = GetComponent<Services>();
-        //services.GetReports();
+        services.GetReports();
         //services.PostSesion("aaa", "aaa");
         //services.PostReport("3", 3);
         //services.GetPlayers();

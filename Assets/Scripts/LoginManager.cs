@@ -42,6 +42,7 @@ public class LoginManager : MonoBehaviour
     [SerializeField]
     private GameObject servicesGameObject;
     private Services services;
+    private string urlApi = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits";
     //[SerializeField]
     //private Button btnPlay;
     // Start is called before the first frame update
@@ -183,7 +184,7 @@ public class LoginManager : MonoBehaviour
     
     IEnumerator PostAuthPlayer_Coroutine(String user,String password, bool autoLogin)
     {
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/auth/player";
+        string url = urlApi + "/auth/player";
         int idPlayer = 0;
         AuthUser usr = new AuthUser(user,password);
         var json = JsonConvert.SerializeObject(usr);
@@ -242,7 +243,7 @@ public class LoginManager : MonoBehaviour
 
     IEnumerator PostPlayer_Coroutine(String nombre, String password, String edad, string id, String token)
     {
-        String url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/add/player";
+        String url = urlApi + "/add/player";
         int idTutor = Convert.ToInt32(id);
         int idPlayer = 0;
         Player player = new Player(nombre,password,edad,/*idTutor,*/token);
@@ -289,7 +290,7 @@ public class LoginManager : MonoBehaviour
 
     IEnumerator GetUsers_Coroutine()
     {
-        String url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/list/players";
+        String url = urlApi + "/list/players";
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
             yield return request.SendWebRequest();
@@ -308,7 +309,7 @@ public class LoginManager : MonoBehaviour
     IEnumerator GetUserById_Coroutine(String id)
     {
         JSONNode itemsData;
-        String url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/list/player/" + id;
+        String url = urlApi + "/list/player/" + id;
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
             yield return request.SendWebRequest();
@@ -430,7 +431,7 @@ public class LoginManager : MonoBehaviour
 
     async Task PostAuthPlayer_Async(string user, string password, bool autoLogin)
     {
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/auth/player";
+        string url = urlApi + "/auth/player";
         int idPlayer = 0;
         AuthUser usr = new AuthUser(user, password);
         var json = JsonConvert.SerializeObject(usr);
@@ -476,7 +477,7 @@ public class LoginManager : MonoBehaviour
                 PlayerPrefs.Save();
                 if (services == null)
                 {
-                    Debug.Log("NULL AAAAAAAAAAAAA");
+                    Debug.Log("NULL");
                 }
                 else
                 {
@@ -493,7 +494,7 @@ public class LoginManager : MonoBehaviour
 
     async Task PostPlayer_Async(string nombre, string password, string edad, /*string id,*/ string token)
     {
-        String url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/add/player";
+        String url = urlApi + "/add/player";
         //int idTutor = Convert.ToInt32(id);
         int idPlayer = 0;
         Player player = new Player(nombre, password, edad, /*idTutor,*/ token);

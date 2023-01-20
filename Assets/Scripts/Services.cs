@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 public class Services : MonoBehaviour
 {
+    private string urlApi = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits";
     private bool reg;
     private bool getStatusUserById;
     private bool getStatusAuth;
@@ -64,7 +65,7 @@ public class Services : MonoBehaviour
 
     IEnumerator PostAuthPlayer_Coroutine(string user, string password)
     {
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/auth/player";
+        string url = urlApi + "/auth/player";
 
         AuthUser usr = new AuthUser(user, password);
         var json = JsonConvert.SerializeObject(usr);
@@ -130,7 +131,7 @@ public class Services : MonoBehaviour
 
     IEnumerator PostReport_Coroutine(string currentScoreLevel, int idLevelPlayed)
     {
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/add/report";
+        string url = urlApi + "/add/report";
 
         string dateEndLevel = DateTime.Now.ToString().Replace("/", "-");
         Report report = new Report(PlayerPrefs.GetString("dateStartLevel"), dateEndLevel, PlayerPrefs.GetInt("idSesion"), currentScoreLevel, idLevelPlayed);
@@ -169,7 +170,7 @@ public class Services : MonoBehaviour
 
     IEnumerator PostSesion_Coroutine(string dateStart, string dateEnd)
     {
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/add/sesion";
+        string url = urlApi + "/add/sesion";
 
         Sesion sesion = new Sesion(dateStart, dateEnd, PlayerPrefs.GetInt("idPlayer"));
         //Sesion sesion = new Sesion("09-12-2022 7:00", "09 - 12 - 2022 8:00",35);
@@ -212,7 +213,7 @@ public class Services : MonoBehaviour
 
     IEnumerator UpdateSesion_Coroutine()
     {
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/update/sesion/" + PlayerPrefs.GetInt("oldSesion").ToString();
+        string url = urlApi + "/update/sesion/" + PlayerPrefs.GetInt("oldSesion").ToString();
 
         dateEndc date = new dateEndc(PlayerPrefs.GetString("dateEnd"));
         var json = JsonConvert.SerializeObject(date);
@@ -247,7 +248,7 @@ public class Services : MonoBehaviour
 
     IEnumerator UpdateLevelStatus_Coroutine(string level)
     {
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/enable/level/" + level + "/player/" + PlayerPrefs.GetInt("idPlayer");
+        string url = urlApi + "/enable/level/" + level + "/player/" + PlayerPrefs.GetInt("idPlayer");
 
         dateEndc date = new dateEndc(PlayerPrefs.GetString("dateEnd"));
         var json = JsonConvert.SerializeObject(date);
@@ -282,7 +283,7 @@ public class Services : MonoBehaviour
     IEnumerator GetUserById_Coroutine()
     {
         JSONNode itemsData;
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/list/player/" + PlayerPrefs.GetInt("idPlayer").ToString();
+        string url = urlApi + "/list/player/" + PlayerPrefs.GetInt("idPlayer").ToString();
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
             yield return request.SendWebRequest();
@@ -310,7 +311,7 @@ public class Services : MonoBehaviour
     IEnumerator GetPlayers_Coroutine()
     {
         JSONNode itemsData;
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/list/players";
+        string url = urlApi + "/list/players";
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
             yield return request.SendWebRequest();
@@ -326,14 +327,12 @@ public class Services : MonoBehaviour
             }
             request.Dispose();
         }
-
-        //
 
     }
     IEnumerator GetSesions_Coroutine()
     {
         JSONNode itemsData;
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/list/sesions";
+        string url = urlApi + "/list/sesions";
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
             yield return request.SendWebRequest();
@@ -350,13 +349,11 @@ public class Services : MonoBehaviour
             request.Dispose();
         }
 
-        //
-
     }
     IEnumerator GetReports_Coroutine()
     {
         JSONNode itemsData;
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/list/reports";
+        string url = urlApi + "/list/reports";
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
             yield return request.SendWebRequest();
@@ -376,8 +373,7 @@ public class Services : MonoBehaviour
     //ASYNC 
     public async Task PostAuthPlayer_Async(string user, string password)
     {
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/auth/player";
-
+        string url = urlApi + "/auth/player";
         AuthUser usr = new AuthUser(user, password);
         var json = JsonConvert.SerializeObject(usr);
         int idPlayer = 0;
@@ -393,7 +389,6 @@ public class Services : MonoBehaviour
         {
             await Task.Yield();
         }
-
         switch (webRequest.result)
         {
             case UnityWebRequest.Result.InProgress:
@@ -433,7 +428,7 @@ public class Services : MonoBehaviour
     public async Task GetUserById_Async()
     {
         JSONNode itemsData;
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/list/player/" + PlayerPrefs.GetInt("idPlayer").ToString();
+        string url = urlApi + "/list/player/" + PlayerPrefs.GetInt("idPlayer").ToString();
         UnityWebRequest webRequest = UnityWebRequest.Get(url);
         webRequest.SendWebRequest();
 
@@ -460,19 +455,15 @@ public class Services : MonoBehaviour
             SceneManager.LoadScene("ChooseLevelScene");
         }
         webRequest.Dispose();
-
-        //SceneManager.LoadScene("ChooseLevelScene");
     }
     public async Task PostReport_Aync(string currentScoreLevel, int idLevelPlayed)
     {
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/add/report";
+        string url = urlApi + "/add/report";
 
         string dateEndLevel = DateTime.Now.ToString().Replace("/", "-");
         Report report = new Report(PlayerPrefs.GetString("dateStartLevel"), dateEndLevel, PlayerPrefs.GetInt("idSesion"), currentScoreLevel, idLevelPlayed);
         Debug.Log(PlayerPrefs.GetString("dateStartLevel"));
         Debug.Log(dateEndLevel);
-        //Report report = new Report(PlayerPrefs.GetString("dateStartLevel"), dateEndLevel, 89, currentScoreLevel, idLevelPlayed);
-        //Report report = new Report("08-12-2022 11:00", "08-12-2022 12:00", 119, "3", 3);
         var json = JsonConvert.SerializeObject(report);
 
         using UnityWebRequest webRequest = UnityWebRequest.Post(url, "POST");
@@ -508,10 +499,9 @@ public class Services : MonoBehaviour
     }
     public async Task PostSesion_Async(string dateStart, string dateEnd)
     {
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/add/sesion";
+        string url = urlApi + "/add/sesion";
         Debug.Log("postSesion");
         Sesion sesion = new Sesion(dateStart, dateEnd, PlayerPrefs.GetInt("idPlayer"));
-        //Sesion sesion = new Sesion("09-12-2022 7:00", "09 - 12 - 2022 8:00",35);
         var json = JsonConvert.SerializeObject(sesion);
 
         using UnityWebRequest webRequest = UnityWebRequest.Post(url, "POST");
@@ -548,21 +538,12 @@ public class Services : MonoBehaviour
                 break;
         }
         webRequest.Dispose();
-        /*if (PlayerPrefs.GetString("dateEnd") != "")
-        {
-            await UpdateSesion_Async();
-        }*/
     }
     public async Task<bool> UpdateSesion_Async()
     {
-        Debug.Log("UpdateSesion");
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/update/sesion/" + PlayerPrefs.GetInt("oldSesion").ToString();
-        Debug.Log("UPDATE SESION AAAAAAAAAA");
+        string url = urlApi + "/update/sesion/" + PlayerPrefs.GetInt("oldSesion").ToString();
         dateEndc date = new dateEndc(PlayerPrefs.GetString("dateEnd"));
         var json = JsonConvert.SerializeObject(date);
-        
-        //string datee = DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year + " " + DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second;
-
         using UnityWebRequest webRequest = UnityWebRequest.Post(url, "UPDATE");
         webRequest.SetRequestHeader("Content-Type", "application/json");
         byte[] rawData = Encoding.UTF8.GetBytes(json);
@@ -581,8 +562,6 @@ public class Services : MonoBehaviour
                 webRequest.Dispose();
                 break;
             case UnityWebRequest.Result.Success:
-                //String response = webRequest.downloadHandler.text;
-                //JObject data = JObject.Parse(response);
                 JSONNode info = JSON.Parse(webRequest.downloadHandler.text);
                 Debug.Log(info);
                 webRequest.Dispose();
@@ -600,15 +579,12 @@ public class Services : MonoBehaviour
 
     public async Task UpdateLevelStatus_Async(string level)
     {
-        string url = "https://hygienehabitsback-production.up.railway.app/api/hygienehabits/enable/level/" + level + "/player/" + PlayerPrefs.GetInt("idPlayer");
+        string url = urlApi + "/enable/level/" + level + "/player/" + PlayerPrefs.GetInt("idPlayer");
 
         dateEndc date = new dateEndc(PlayerPrefs.GetString("dateEnd"));
         var json = JsonConvert.SerializeObject(date);
 
         using UnityWebRequest webRequest = UnityWebRequest.Post(url, "UPDATE");
-        //webRequest.SetRequestHeader("Content-Type", "application/json");
-        //byte[] rawData = Encoding.UTF8.GetBytes(json);
-        //webRequest.uploadHandler = new UploadHandlerRaw(rawData);
         webRequest.downloadHandler = new DownloadHandlerBuffer();
         webRequest.SendWebRequest();
 
@@ -622,8 +598,6 @@ public class Services : MonoBehaviour
             case UnityWebRequest.Result.InProgress:
                 break;
             case UnityWebRequest.Result.Success:
-                //String response = webRequest.downloadHandler.text;
-                //JObject data = JObject.Parse(response);
                 JSONNode info = JSON.Parse(webRequest.downloadHandler.text);
                 Debug.Log(info);
 
